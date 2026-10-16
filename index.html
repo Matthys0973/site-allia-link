@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Allia Link – Outils IA sur mesure pour les PME, à Lyon</title>
+<meta name="description" content="Automatisations, tableaux de bord et assistants IA sur mesure pour les PME. Diagnostic gratuit de 30 minutes. Basé à Lyon, en France et en Suisse romande.">
+<meta property="og:title" content="Allia Link – Outils IA sur mesure pour les PME">
+<meta property="og:description" content="Automatisations, tableaux de bord et assistants IA sur mesure. Diagnostic gratuit de 30 minutes.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://allia-link.fr/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23566D4F'/%3E%3Ccircle cx='32' cy='32' r='23' fill='none' stroke='%238B9BE2' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Instrument+Sans:wght@400;500;600&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Allia Link","url":"https://allia-link.fr/","email":"matthys@allia-link.fr","description":"Automatisations, tableaux de bord et assistants IA sur mesure pour les PME.","areaServed":["Lyon","Auvergne-Rhône-Alpes","France","Suisse romande"],"address":{"@type":"PostalAddress","addressLocality":"Lyon","addressCountry":"FR"},"founder":{"@type":"Person","name":"Matthys Houvenaghel"}}
+</script>
+<style>
+:root{
+  --bg:#FFFAF4; --surface:#FFFFFF; --sand:#F6F0E6;
+  --ink:#2C3829; --ink-2:#5E6A5A; --line:#E6DED1; --line-2:#CDC4B4;
+  --sage:#566D4F; --on-sage:#FFFAF4;
+  --peri:#8B9BE2; --on-peri:#1B2147;
+  --arc:#566D4F; --ring:#8B9BE2; --on-arc:#FFFAF4;
+  --serif:"Gilda Display","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Instrument Sans","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --logo:url("data:image/png;base64,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");
+  --nav-h:60px;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161D17; --surface:#1E261F; --sand:#1B231C;
+    --ink:#F3EEE4; --ink-2:#B4BDAE; --line:#313C32; --line-2:#475347;
+    --sage:#8AA582; --on-sage:#111711;
+    --peri:#A3B0EE; --on-peri:#141936;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161D17; --surface:#1E261F; --sand:#1B231C;
+  --ink:#F3EEE4; --ink-2:#B4BDAE; --line:#313C32; --line-2:#475347;
+  --sage:#8AA582; --on-sage:#111711;
+  --peri:#A3B0EE; --on-peri:#141936;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + var(--nav-h) + 16px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.005em;text-wrap:balance}
+h3,h4,p,figure{margin:0}
+:focus-visible{outline:2px solid var(--peri);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+.logo{display:block;aspect-ratio:560/253;background:var(--ink);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+
+/* Navigation */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 24px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:block;width:80px;visibility:hidden;opacity:0;transition:opacity .3s}
+.nav.past .nav-logo{visibility:visible;opacity:1}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:14.5px}
+.nav-links a{text-decoration:none;color:var(--ink-2)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links .nav-cta{color:var(--on-sage);background:var(--sage);padding:7px 16px;border-radius:999px;font-weight:500}
+.nav-links .nav-cta:hover{color:var(--on-sage)}
+@media (max-width:900px){.nav-links a:not(.nav-cta){display:none}}
+
+/* Boutons */
+.btn{display:inline-block;background:var(--sage);color:var(--on-sage);text-decoration:none;padding:14px 26px;border-radius:999px;font-weight:600;font-size:15.5px;line-height:1.2}
+.btn-link{font-weight:500;font-size:15.5px;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+
+/* Ouverture */
+.hero{--peek:clamp(22px,calc(14vw - 28px),280px);position:relative;overflow:hidden;isolation:isolate;min-height:min(88vh,820px);display:grid;place-items:center;text-align:center;padding:64px calc(var(--peek) + 20px) 84px}
+.arc{position:absolute;top:6%;bottom:6%;width:clamp(240px,40vw,640px);border-radius:50%;background:var(--arc);z-index:-1}
+.arc::after{content:"";position:absolute;inset:7% 9%;border-radius:50%;border:3px solid var(--ring)}
+.arc-l{right:calc(100% - var(--peek))}
+.arc-r{left:calc(100% - var(--peek))}
+.hero-in{max-width:700px}
+.hero .logo{width:clamp(140px,16vw,196px);margin:0 auto 40px}
+.tagline{font-size:15px;color:var(--ink-2);margin-bottom:14px}
+.hero h1{font-size:clamp(38px,6vw,76px);line-height:1.05;margin-bottom:24px}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--ink-2);max-width:34em;margin:0 auto}
+.cta-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 28px;margin-top:36px}
+.micro{margin-top:16px;font-size:14px;color:var(--ink-2)}
+
+/* Preuves */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proof .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.proof .item{padding:28px 28px 30px;border-left:1px solid var(--line)}
+.proof .item:first-child{border-left:0;padding-left:0}
+.proof .item:last-child{padding-right:0}
+.proof .v{display:block;font-family:var(--serif);font-size:32px;line-height:1.15;color:var(--sage)}
+.proof .l{display:block;margin-top:6px;font-size:15px;color:var(--ink-2)}
+@media (max-width:860px){
+  .proof .wrap{grid-template-columns:1fr}
+  .proof .item,.proof .item:first-child,.proof .item:last-child{border-left:0;border-top:1px solid var(--line);padding:20px 0}
+  .proof .item:first-child{border-top:0}
+}
+
+/* Sections */
+.sec{padding:clamp(72px,10vw,128px) 0}
+.alt{background:var(--sand)}
+.sec h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;max-width:18em}
+.sec .sub{margin-top:16px;color:var(--ink-2);font-size:17px;max-width:40em}
+
+/* Offres */
+.offers{list-style:none;padding:0;margin:48px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.offers li{padding:32px 0 34px;border-top:1px solid var(--line-2)}
+.offers svg{width:30px;height:30px;stroke:var(--sage);margin-bottom:18px}
+.offers h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2;margin-bottom:10px}
+.offers p{color:var(--ink-2);font-size:16px}
+.offers .ex{margin-top:16px;font-size:14.5px;color:var(--ink-2)}
+.offers .ex strong{color:var(--sage);font-weight:600;margin-right:6px}
+.offers .ex a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:4px}
+@media (max-width:860px){.offers{grid-template-columns:1fr}}
+
+/* Zoom assistant */
+.feature{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+.checks{list-style:none;padding:0;margin:32px 0 0}
+.checks li{display:grid;grid-template-columns:20px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--line-2);font-size:16px}
+.checks svg{width:20px;height:20px;stroke:var(--sage);margin-top:3px}
+.chat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.chat-head{display:flex;align-items:center;gap:10px;padding-bottom:14px;margin-bottom:4px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.chat-head .dot{width:22px;height:22px;border-radius:50%;background:var(--arc);box-shadow:inset 0 0 0 3px var(--arc),inset 0 0 0 4.5px var(--ring)}
+.msg{max-width:88%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.45}
+.msg.bot{background:var(--sand);border-bottom-left-radius:4px;align-self:flex-start}
+.msg.me{background:var(--sage);color:var(--on-sage);border-bottom-right-radius:4px;align-self:flex-end}
+.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.src{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:5px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.src svg{width:14px;height:14px;stroke:var(--sage);flex:none}
+@media (max-width:860px){.feature{grid-template-columns:1fr;gap:36px}}
+
+/* Méthode */
+.track{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px}
+.step{position:relative}
+.step:not(:last-child)::after{content:"";position:absolute;top:20px;left:52px;right:-16px;height:1px;background:var(--line-2)}
+.ring{width:40px;height:40px;border-radius:50%;background:var(--arc);color:var(--on-arc);display:grid;place-items:center;font-size:14px;font-weight:600;box-shadow:inset 0 0 0 4px var(--arc),inset 0 0 0 5.5px var(--ring);margin-bottom:18px}
+.step h3{font-size:16px;font-weight:600;margin-bottom:6px}
+.step p{font-size:15px;color:var(--ink-2);line-height:1.5;max-width:24em}
+@media (max-width:860px){
+  .track{grid-template-columns:1fr;gap:26px}
+  .step{display:grid;grid-template-columns:40px 1fr;column-gap:18px}
+  .ring{margin:0;grid-row:span 2}
+  .step:not(:last-child)::after{top:48px;bottom:-22px;left:20px;right:auto;width:1px;height:auto}
+}
+.note-line{display:flex;align-items:center;gap:10px;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2)}
+.note-line svg{flex:none;width:20px;height:20px;stroke:var(--sage)}
+
+/* Calcul */
+.calc{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:48px;margin-top:44px;align-items:stretch}
+.field{padding:20px 0 22px;border-top:1px solid var(--line-2)}
+.field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:16px;font-weight:500}
+.field output{font-variant-numeric:tabular-nums;font-weight:600;color:var(--sage);white-space:nowrap}
+.field input[type=range]{width:100%;margin:14px 0 0;accent-color:var(--sage);height:24px;cursor:pointer}
+.result{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:32px;display:flex;flex-direction:column;justify-content:center}
+.result .big{display:block;font-family:var(--serif);font-size:clamp(40px,5vw,56px);line-height:1;font-variant-numeric:tabular-nums}
+.result .lab{display:block;margin-top:8px;color:var(--ink-2);font-size:15px}
+.result .row+.row{margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
+.result .fine{margin-top:22px;font-size:13.5px;color:var(--ink-2)}
+.result .btn{align-self:flex-start;margin-top:22px}
+@media (max-width:860px){.calc{grid-template-columns:1fr;gap:28px}}
+
+/* Réalisations */
+.reals{list-style:none;padding:0;margin:40px 0 0;border-top:1px solid var(--line-2)}
+.reals a{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,5fr) minmax(0,4fr);gap:24px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--line-2);text-decoration:none}
+.reals .c{font-size:14.5px;color:var(--sage)}
+.reals .t{font-family:var(--serif);font-size:22px;line-height:1.25}
+.reals .r{font-size:15px;color:var(--ink-2)}
+.reals a:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.more{margin-top:28px}
+@media (max-width:860px){.reals a{grid-template-columns:1fr;gap:4px}}
+
+/* Données */
+.rules{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.rules li{display:grid;grid-template-columns:28px 1fr;align-content:start;column-gap:18px;padding:28px 0;border-top:1px solid var(--line-2)}
+.rules svg{width:28px;height:28px;stroke:var(--sage);grid-row:span 2;margin-top:1px}
+.rules h3{font-size:17px;font-weight:600;margin-bottom:6px}
+.rules p{color:var(--ink-2);font-size:15.5px}
+.rules-note{padding-top:24px;border-top:1px solid var(--line-2);font-size:15px;color:var(--ink-2)}
+@media (max-width:860px){.rules{grid-template-columns:1fr}}
+
+/* Interlocuteur */
+.about{display:grid;grid-template-columns:auto minmax(0,1fr);gap:44px;align-items:start;margin-top:44px;max-width:880px}
+.mono{width:116px;height:116px;border-radius:50%;background:var(--arc);color:var(--on-arc);display:grid;place-items:center;font-family:var(--serif);font-size:38px;box-shadow:inset 0 0 0 9px var(--arc),inset 0 0 0 11px var(--ring)}
+.about .name{font-size:18px;font-weight:600}
+.about .role{color:var(--ink-2);font-size:15px}
+.about p+p{margin-top:14px}
+.about .txt{margin-top:18px;color:var(--ink-2);font-size:17px}
+@media (max-width:640px){.about{grid-template-columns:1fr;gap:24px}.mono{width:92px;height:92px;font-size:30px}}
+
+/* Questions */
+.faq{margin-top:40px;border-top:1px solid var(--line-2);max-width:880px}
+.faq details{border-bottom:1px solid var(--line-2)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:18px;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{flex:none;width:18px;height:18px;stroke:var(--ink-2);transition:transform .2s ease}
+.faq details[open] summary svg{transform:rotate(45deg)}
+.faq details p{padding:0 0 24px;color:var(--ink-2);max-width:44em}
+
+/* Appel final */
+.contact{--peek:clamp(16px,calc(9vw - 24px),170px);position:relative;overflow:hidden;isolation:isolate;padding:clamp(88px,12vw,150px) calc(var(--peek) + 20px);text-align:center}
+.contact .arc{top:14%;bottom:14%;width:clamp(200px,28vw,440px)}
+.contact h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;margin:0 auto;max-width:16em}
+.contact .sub{margin:18px auto 0;color:var(--ink-2);font-size:17px;max-width:32em}
+.contact .cta-row{margin-top:34px}
+.contact .mail{margin-top:22px;font-size:14.5px;color:var(--ink-2)}
+
+/* Pied de page */
+.foot{border-top:1px solid var(--line);padding:36px 0 44px;font-size:14px;color:var(--ink-2)}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px}
+.foot .brand{display:flex;align-items:center;gap:16px}
+.foot .logo{width:70px}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot a{color:var(--ink-2);text-decoration:none}
+.foot a:hover{color:var(--ink)}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .arc-l{animation:arcL 1.2s cubic-bezier(.16,.84,.3,1) both}
+  .hero .arc-r{animation:arcR 1.2s cubic-bezier(.16,.84,.3,1) both}
+  .hero-in{animation:show .9s .35s ease-out both}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.faq summary svg{transition:none}}
+@keyframes arcL{from{transform:translateX(-35%)}to{transform:none}}
+@keyframes arcR{from{transform:translateX(35%)}to{transform:none}}
+@keyframes show{from{opacity:0}to{opacity:1}}
+@media print{.nav,body::before{display:none}.hero{min-height:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="#top"><span class="logo" role="img" aria-label="Allia Link, retour en haut de page"></span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#offres">Offres</a>
+      <a href="#methode">Méthode</a>
+      <a href="realisations.html">Réalisations</a>
+      <a href="#donnees">Données</a>
+      <a href="#faq">Questions</a>
+      <a class="nav-cta" href="#diagnostic">Diagnostic gratuit</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <div class="arc arc-l" aria-hidden="true"></div>
+  <div class="arc arc-r" aria-hidden="true"></div>
+  <div class="hero-in">
+    <span class="logo" role="img" aria-label="Allia Link"></span>
+    <p class="tagline">Automatisation IA sur mesure pour les PME</p>
+    <h1>Des outils IA qui rendent des heures à vos équipes</h1>
+    <p class="lead">Automatisations, tableaux de bord et assistants conçus pour votre façon de travailler. Ils s’installent dans vos outils, travaillent avec vos données et citent leurs sources.</p>
+    <div class="cta-row">
+      <a class="btn" href="#diagnostic">Réserver mon diagnostic gratuit</a>
+      <a class="btn-link" href="realisations.html">Voir les réalisations</a>
+    </div>
+    <p class="micro">30&nbsp;minutes en visio, sans engagement. Vous repartez avec vos pistes prioritaires.</p>
+  </div>
+</section>
+
+<section class="proof" aria-label="Résultats obtenus">
+  <div class="wrap">
+    <p class="item"><span class="v">30&nbsp;min</span><span class="l">par fiche réglementaire, au lieu de plusieurs heures</span></p>
+    <p class="item"><span class="v">200&nbsp;et&nbsp;plus</span><span class="l">chantiers suivis automatiquement sur un territoire</span></p>
+    <p class="item"><span class="v">Chaque lundi</span><span class="l">un plan de charge à jour, sans ressaisie</span></p>
+  </div>
+</section>
+
+<section class="sec" id="offres" aria-labelledby="offres-t">
+  <div class="wrap">
+    <h2 id="offres-t">Quatre façons de gagner du temps</h2>
+    <p class="sub">Des outils branchés sur ce que vous utilisez déjà&nbsp;: Microsoft&nbsp;365, Excel, votre outil de gestion ou votre CRM.</p>
+    <ul class="offers">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="m9 14 2 2 4-4"/></svg>
+        <h3>Automatiser les tâches répétitives</h3>
+        <p>Ressaisies, relances, données à extraire de PDF, documents Word ou Excel à produire selon votre trame. L’outil prépare, vous validez.</p>
+        <p class="ex"><strong>Exemple</strong><a href="realisations.html#fiches">une fiche réglementaire en 30&nbsp;minutes au lieu de plusieurs heures</a></p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></svg>
+        <h3>Piloter avec des chiffres à jour</h3>
+        <p>Vos sources (outil de gestion, CRM, fichiers Excel) alimentent un tableau de bord qui se met à jour seul, avec le détail en un clic.</p>
+        <p class="ex"><strong>Exemple</strong><a href="realisations.html#plan-de-charge">le plan de charge d’un cabinet de conseil, actualisé chaque semaine</a></p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/><path d="M9 11h6M9 14h4"/></svg>
+        <h3>Interroger le savoir de l’entreprise</h3>
+        <p>Un assistant répond aux questions de vos équipes à partir de vos documents (procédures, offres passées, méthodes) et cite ses sources.</p>
+        <p class="ex"><strong>Exemple</strong><a href="realisations.html#savoir">l’assistant de connaissances d’un cabinet de conseil, dans Teams</a></p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+        <h3>Surveiller votre marché</h3>
+        <p>Des agents lisent la presse, les appels d’offres et les publications officielles, puis vous signalent ce qui compte, au bon moment.</p>
+        <p class="ex"><strong>Exemple</strong><a href="realisations.html#veille">la veille des chantiers d’un territoire pour Neo Eco</a></p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec alt" id="assistant" aria-labelledby="assistant-t">
+  <div class="wrap feature">
+    <div>
+      <h2 id="assistant-t">Un assistant qui connaît votre entreprise</h2>
+      <p class="sub">Procédures, offres passées, méthodes, retours d’expérience&nbsp;: vos équipes posent leurs questions en langage courant, l’assistant cherche dans vos documents et répond en citant ses sources.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Disponible là où vos équipes travaillent&nbsp;: Teams, intranet ou navigateur.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Chacun ne voit que les documents auxquels il a déjà accès.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Chaque réponse renvoie au document source, à la bonne page.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Quand l’information n’existe pas, il le dit au lieu d’inventer.</li>
+      </ul>
+    </div>
+    <div class="chat" role="group" aria-label="Exemple d’échange avec un assistant de connaissances">
+      <div class="chat-head"><span class="dot" aria-hidden="true"></span>Assistant de l’entreprise</div>
+      <p class="msg me">Avons-nous déjà répondu à un appel d’offres dans la santé&#8239;?</p>
+      <div class="msg bot">Oui, deux fois en 2025&nbsp;: pour une clinique et pour un laboratoire. La réponse la plus complète détaille le planning et la méthode, pages 8 à 12.
+        <span class="srcs">
+          <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Offre_clinique_2025.pdf, p.&nbsp;8</span>
+          <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Offre_laboratoire_2025.docx</span>
+        </span>
+      </div>
+      <p class="msg me">Quel tarif journalier avions-nous proposé&#8239;?</p>
+      <p class="msg bot">Je ne trouve pas ce tarif dans les documents auxquels vous avez accès. Le service commercial pourra vous le communiquer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="methode" aria-labelledby="methode-t">
+  <div class="wrap">
+    <h2 id="methode-t">Comment ça se passe</h2>
+    <p class="sub">Un premier résultat concret en quelques semaines, pas un projet de dix-huit mois.</p>
+    <ol class="track">
+      <li class="step"><span class="ring" aria-hidden="true">1</span><h3>Diagnostic gratuit</h3><p>30&nbsp;minutes pour repérer vos tâches les plus chronophages et choisir la piste la plus rentable.</p></li>
+      <li class="step"><span class="ring" aria-hidden="true">2</span><h3>Première version</h3><p>Un prototype sur vos vraies données en deux à trois semaines. Vous testez, on ajuste.</p></li>
+      <li class="step"><span class="ring" aria-hidden="true">3</span><h3>Mise en service</h3><p>L’outil rejoint vos outils du quotidien et vos équipes sont formées.</p></li>
+      <li class="step"><span class="ring" aria-hidden="true">4</span><h3>Suivi</h3><p>On mesure le temps gagné et on fait évoluer l’outil avec vous.</p></li>
+    </ol>
+    <p class="note-line"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12.6V5a1.5 1.5 0 0 1 1.5-1.5h7.6l8 8a1.5 1.5 0 0 1 0 2.1l-6.5 6.5a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>Le prix est fixé au forfait après le diagnostic&nbsp;: vous le connaissez avant de vous engager.</p>
+  </div>
+</section>
+
+<section class="sec alt" id="calcul" aria-labelledby="calcul-t">
+  <div class="wrap">
+    <h2 id="calcul-t">Combien vous coûtent vos tâches répétitives&#8239;?</h2>
+    <p class="sub">Déplacez les curseurs&nbsp;: le calcul se fait directement dans la page, rien n’est enregistré.</p>
+    <div class="calc">
+      <div>
+        <div class="field">
+          <label for="c-p">Personnes concernées <output id="o-p" for="c-p">5</output></label>
+          <input type="range" id="c-p" min="1" max="50" step="1" value="5">
+        </div>
+        <div class="field">
+          <label for="c-h">Heures par semaine et par personne <output id="o-h" for="c-h">6&nbsp;h</output></label>
+          <input type="range" id="c-h" min="1" max="20" step="1" value="6">
+        </div>
+        <div class="field">
+          <label for="c-c">Coût horaire chargé <output id="o-c" for="c-c">40&nbsp;€</output></label>
+          <input type="range" id="c-c" min="20" max="120" step="5" value="40">
+        </div>
+      </div>
+      <div class="result" aria-live="polite">
+        <div class="row"><span class="big" id="r-h">1&#8239;350&nbsp;h</span><span class="lab">par an passées sur ces tâches</span></div>
+        <div class="row"><span class="big" id="r-c">54&#8239;000&nbsp;€</span><span class="lab">de coût annuel</span></div>
+        <p class="fine">Base de 45&nbsp;semaines travaillées. Le diagnostic gratuit identifie la part réellement automatisable.</p>
+        <a class="btn" href="#diagnostic">Réserver mon diagnostic gratuit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="realisations" aria-labelledby="real-t">
+  <div class="wrap">
+    <h2 id="real-t">Réalisations</h2>
+    <p class="sub">Quatre outils conçus sur mesure, présentés en détail avec leur fonctionnement.</p>
+    <ul class="reals">
+      <li><a href="realisations.html#veille"><span class="c">Neo Eco</span><span class="t">Repérer les chantiers d’un territoire dès leur annonce</span><span class="r">Plus de 200&nbsp;opérations suivies automatiquement</span></a></li>
+      <li><a href="realisations.html#plan-de-charge"><span class="c">Cabinet de conseil</span><span class="t">Savoir qui est disponible avant la réunion du lundi</span><span class="r">Un plan de charge actualisé chaque semaine</span></a></li>
+      <li><a href="realisations.html#fiches"><span class="c">Industriel du dispositif médical</span><span class="t">Une fiche réglementaire en 30&nbsp;minutes</span><span class="r">Au lieu de plusieurs heures, chaque champ sourcé</span></a></li>
+      <li><a href="realisations.html#savoir"><span class="c">Cabinet de conseil</span><span class="t">Retrouver le savoir de l’entreprise en une question</span><span class="r">Une réponse sourcée, avec le lien vers la bonne slide</span></a></li>
+    </ul>
+    <p class="more"><a class="btn-link" href="realisations.html">Voir toutes les réalisations</a></p>
+  </div>
+</section>
+
+<section class="sec alt" id="donnees" aria-labelledby="donnees-t">
+  <div class="wrap">
+    <h2 id="donnees-t">Vos données restent les vôtres</h2>
+    <p class="sub">Quatre règles appliquées à chaque projet.</p>
+    <ul class="rules">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.2V20h14V9.2"/><path d="M10 20v-5h4v5"/></svg>
+        <h3>Dans votre environnement</h3>
+        <p>Dès que possible, l’outil fonctionne dans vos systèmes existants (Microsoft&nbsp;365, SharePoint, vos serveurs) plutôt que sur une plateforme externe.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Aucun entraînement sur vos données</h3>
+        <p>Uniquement des offres professionnelles d’IA, dont les conditions prévoient que vos données ne servent pas à entraîner leurs modèles.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+        <h3>Le strict nécessaire</h3>
+        <p>Accès limité aux données utiles, en lecture seule quand c’est possible. Les données personnelles sont réduites au minimum.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg>
+        <h3>Tout est traçable</h3>
+        <p>Chaque information produite renvoie à sa source, et une personne de votre équipe valide avant usage.</p>
+      </li>
+    </ul>
+    <p class="rules-note">Pour les données sensibles, le choix du modèle d’IA et de son hébergement se décide avec vous, en tenant compte du RGPD en France et de la nLPD en Suisse.</p>
+  </div>
+</section>
+
+<section class="sec" id="apropos" aria-labelledby="apropos-t">
+  <div class="wrap">
+    <h2 id="apropos-t">Votre interlocuteur</h2>
+    <div class="about">
+      <div class="mono" aria-hidden="true">MH</div>
+      <div>
+        <p class="name">Matthys Houvenaghel</p>
+        <p class="role">Fondateur d’Allia Link</p>
+        <div class="txt">
+          <p>Double formation ingénieur (Grenoble INP) et école de commerce (Grenoble École de Management). Avant Allia Link, j’ai travaillé en conseil en stratégie industrielle, chez Volvo Group et au Crédit Agricole.</p>
+          <p>Je conçois et construis moi-même les outils que je propose&nbsp;: vous parlez directement à la personne qui les fabrique, du diagnostic à la mise en service.</p>
+          <p>Basé à Lyon, j’interviens en Auvergne-Rhône-Alpes, en Suisse romande et à distance partout en France.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="faq" aria-labelledby="faq-t">
+  <div class="wrap">
+    <h2 id="faq-t">Questions fréquentes</h2>
+    <div class="faq">
+      <details>
+        <summary>Combien coûte un projet&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Le diagnostic de 30&nbsp;minutes est gratuit. Chaque projet est ensuite chiffré au forfait, selon son périmètre&nbsp;: vous connaissez le prix avant de démarrer.</p>
+      </details>
+      <details>
+        <summary>En combien de temps voit-on un résultat&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Pour un besoin bien ciblé, une première version sur vos données est prête en deux à trois semaines. Vous la testez avant toute mise en service.</p>
+      </details>
+      <details>
+        <summary>Faut-il changer nos outils&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Non. Les outils s’appuient sur ce que vous utilisez déjà&nbsp;: Microsoft&nbsp;365, SharePoint, Excel, votre outil de gestion ou votre CRM.</p>
+      </details>
+      <details>
+        <summary>Et si l’IA se trompe&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Chaque information produite cite sa source, ce qui manque est signalé plutôt qu’inventé, et une personne de votre équipe valide les étapes sensibles.</p>
+      </details>
+      <details>
+        <summary>Nos données sont-elles protégées&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>C’est la première question traitée dans chaque projet. Vos données restent dans votre environnement dès que possible et ne servent pas à entraîner les modèles. Les règles appliquées sont détaillées <a href="#donnees">plus haut</a>.</p>
+      </details>
+      <details>
+        <summary>Nos équipes sauront-elles s’en servir&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>La formation fait partie du projet&nbsp;: vos équipes testent l’outil dès la première version et sont accompagnées lors de la mise en service.</p>
+      </details>
+      <details>
+        <summary>Intervenez-vous en Suisse&#8239;?<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <p>Oui, en Suisse romande comme en France, sur place ou à distance. Les règles suisses de protection des données (nLPD) sont prises en compte dès la conception.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="diagnostic" aria-labelledby="diag-t">
+  <div class="arc arc-l" aria-hidden="true"></div>
+  <div class="arc arc-r" aria-hidden="true"></div>
+  <h2 id="diag-t">Réservez votre diagnostic gratuit</h2>
+  <p class="sub">30&nbsp;minutes, en visio ou à Lyon, sans engagement. On regarde ensemble vos tâches les plus chronophages et ce qui peut être automatisé.</p>
+  <div class="cta-row">
+    <a class="btn" href="mailto:matthys@allia-link.fr?subject=Diagnostic%20gratuit%20de%2030%20minutes">Demander un créneau par e-mail</a>
+  </div>
+  <p class="mail">matthys@allia-link.fr</p>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="brand"><span class="logo" role="img" aria-label="Allia Link"></span><span>Automatisation IA sur mesure, Lyon</span></div>
+    <nav aria-label="Pied de page">
+      <a href="realisations.html">Réalisations</a>
+      <a href="#donnees">Données</a>
+      <a href="#faq">Questions</a>
+      <a href="#diagnostic">Contact</a>
+    </nav>
+    <span>© 2026 Allia Link</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  const heroLogo = document.querySelector('.hero .logo');
+  if ('IntersectionObserver' in window && heroLogo) {
+    new IntersectionObserver(([e]) => nav.classList.toggle('past', !e.isIntersecting), { rootMargin: '-60px 0px 0px 0px' }).observe(heroLogo);
+  } else {
+    nav.classList.add('past');
+  }
+
+  // Calcul : personnes × heures par semaine × 45 semaines × coût horaire
+  const fmt = new Intl.NumberFormat('fr-FR');
+  const NBSP = '\u00A0';
+  const p = document.getElementById('c-p'), h = document.getElementById('c-h'), c = document.getElementById('c-c');
+  const op = document.getElementById('o-p'), oh = document.getElementById('o-h'), oc = document.getElementById('o-c');
+  const rh = document.getElementById('r-h'), rc = document.getElementById('r-c');
+  function update() {
+    const hours = +p.value * +h.value * 45;
+    const cost = Math.round(hours * +c.value / 100) * 100;
+    op.value = p.value;
+    oh.value = h.value + NBSP + 'h';
+    oc.value = c.value + NBSP + '€';
+    rh.textContent = fmt.format(hours) + NBSP + 'h';
+    rc.textContent = fmt.format(cost) + NBSP + '€';
+  }
+  [p, h, c].forEach(el => el.addEventListener('input', update));
+  update();
+})();
+</script>
+</body>
+</html>
