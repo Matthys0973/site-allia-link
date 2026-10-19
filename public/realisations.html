@@ -215,10 +215,10 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
 
 /* Pied de page */
 .foot{border-top:1px solid var(--line);padding:36px 0 44px;font-size:14px;color:var(--ink-2)}
-.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 32px}
-.foot .brand{display:flex;align-items:center;gap:16px}
+.foot .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px 24px}
+.foot .copy{white-space:nowrap}
 .foot .logo{width:70px}
-.foot nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.foot .copy{justify-self:end}
 .foot a{color:var(--ink-2);text-decoration:none}
 .foot a:hover{color:var(--ink)}
 
@@ -507,14 +507,9 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
 
 <footer class="foot">
   <div class="wrap">
-    <div class="brand"><span class="logo" role="img" aria-label="Allia Link"></span><span>Automatisation IA sur mesure, Lyon</span></div>
-    <nav aria-label="Pied de page">
-      <a href="index.html">Accueil</a>
-      <a href="#donnees">Données</a>
-      <a href="index.html#faq">Questions</a>
-      <a href="index.html#diagnostic">Contact</a>
-    </nav>
-    <span>© 2026 Allia Link</span>
+    <span class="logo" role="img" aria-label="Allia Link"></span>
+    <a href="index.html#diagnostic">Contact</a>
+    <span class="copy">© 2026 Allia Link</span>
   </div>
 </footer>
 
