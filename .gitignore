@@ -1,0 +1,11 @@
+# Clés et secrets : ne jamais publier
+.env
+.env.*
+
+# Netlify en local
+.netlify/
+node_modules/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
