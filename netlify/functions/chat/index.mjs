@@ -129,7 +129,8 @@ export default async (req, context) => {
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT, messages, stop_sequences: STOPS }),
+      // Réflexion désactivée : sur Haiku 5.5 elle est active par défaut et ses tokens consomment le plafond de la réponse
+      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT, messages, stop_sequences: STOPS, thinking: { type: "disabled" } }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (!res.ok) {
