@@ -158,19 +158,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:860px){.chat-log{max-height:300px}.chat.started .chat-log{height:300px}}
 @media (max-width:420px){.live-tag .opt{display:none}}
 
-/* Équipe */
-.team{display:grid;gap:40px;margin-top:44px;max-width:760px}
-.person{display:grid;grid-template-columns:180px minmax(0,1fr);gap:32px;align-items:center}
-.person img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:16px;background:var(--sand)}
-.person h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.2}
-.person .role{margin-top:4px;color:var(--sage);font-size:15px;font-weight:500}
-.person .bio{margin-top:10px;color:var(--ink-2);font-size:15.5px}
-.person .li{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:15px;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
-.person .li svg{width:15px;height:15px;stroke:currentColor}
-.person .li:hover{color:var(--sage)}
-.team-note{margin-top:40px;padding-top:22px;border-top:1px solid var(--line-2);color:var(--ink-2);font-size:15.5px;max-width:860px}
-@media (max-width:640px){.team{gap:32px}.person{grid-template-columns:104px minmax(0,1fr);gap:18px;align-items:start}.person h3{font-size:22px}}
-
 /* Méthode */
 .track{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px}
 .step{position:relative}
@@ -239,6 +226,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .foot .copy{white-space:nowrap}
 .foot .logo{width:70px}
 .foot .copy{justify-self:end}
+.foot-links{display:flex;gap:22px}
 .foot a{color:var(--ink-2);text-decoration:none}
 .foot a:hover{color:var(--ink)}
 
@@ -251,6 +239,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes arcL{from{transform:translateX(-35%)}to{transform:none}}
 @keyframes arcR{from{transform:translateX(35%)}to{transform:none}}
 @keyframes show{from{opacity:0}to{opacity:1}}
+/* Arcs : s'écartent quand on quitte l'ouverture, se referment à l'arrivée sur le contact */
+@media (prefers-reduced-motion:no-preference){
+  .hero .arc-l,.contact .arc-l{translate:calc(var(--p,0) * var(--peek) * -.8) 0}
+  .hero .arc-r,.contact .arc-r{translate:calc(var(--p,0) * var(--peek) * .8) 0}
+}
 @media print{.nav,body::before{display:none}.hero{min-height:auto}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
@@ -263,7 +256,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="#assistant">Assistant</a>
       <a href="realisations.html">Réalisations</a>
-      <a href="#equipe">Équipe</a>
+      <a href="a-propos.html">À propos</a>
       <a href="#faq">Questions</a>
       <a class="nav-cta" href="#diagnostic">Diagnostic gratuit</a>
     </nav>
@@ -387,33 +380,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </section>
 
-<section class="sec" id="equipe" aria-labelledby="equipe-t">
-  <div class="wrap">
-    <h2 id="equipe-t">L’équipe</h2>
-    <div class="team">
-      <article class="person">
-        <img src="matthys.webp" width="640" height="640" loading="lazy" decoding="async" alt="Portrait de Matthys Houvenaghel">
-        <div>
-          <h3>Matthys Houvenaghel</h3>
-          <p class="role">Ingénieur</p>
-          <p class="bio">Double formation ingénieur (Grenoble INP) et école de commerce (Grenoble École de Management). Expérience en conseil en stratégie industrielle, chez Volvo Group et au Crédit Agricole.</p>
-          <a class="li" href="https://www.linkedin.com/in/matthys-houvenaghel/" target="_blank" rel="noopener">Profil LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></a>
-        </div>
-      </article>
-      <article class="person">
-        <img src="quentin.webp" width="640" height="640" loading="lazy" decoding="async" alt="Portrait de Quentin Houvenaghel">
-        <div>
-          <h3>Quentin Houvenaghel</h3>
-          <p class="role">Ingénieur</p>
-          <p class="bio">Formé à CentraleSupélec.</p>
-          <a class="li" href="https://www.linkedin.com/in/quentin-houvenaghel-121029288/" target="_blank" rel="noopener">Profil LinkedIn<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></a>
-        </div>
-      </article>
-    </div>
-    <p class="team-note">Allia Link est basée à Lyon et intervient en Auvergne-Rhône-Alpes, en Suisse romande et à distance partout en France.</p>
-  </div>
-</section>
-
 <section class="sec alt" id="faq" aria-labelledby="faq-t">
   <div class="wrap">
     <h2 id="faq-t">Questions fréquentes</h2>
@@ -465,7 +431,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <footer class="foot">
   <div class="wrap">
     <span class="logo" role="img" aria-label="Allia Link"></span>
-    <a href="#diagnostic">Contact</a>
+    <nav class="foot-links" aria-label="Pied de page">
+      <a href="#diagnostic">Contact</a>
+      <a href="a-propos.html">À propos</a>
+    </nav>
     <span class="copy">© 2026 Allia Link</span>
   </div>
 </footer>
@@ -473,6 +442,21 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <script>
 (() => {
   const nav = document.querySelector('.nav');
+
+  // Arcs : s'écartent quand on quitte l'ouverture, se referment à l'arrivée sur le contact
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hero = document.querySelector('.hero'), end = document.querySelector('.contact');
+    const clamp = v => Math.min(1, Math.max(0, v));
+    let ticking = false;
+    const moveArcs = () => {
+      ticking = false;
+      if (hero) { const r = hero.getBoundingClientRect(); hero.style.setProperty('--p', clamp(-r.top / (r.height * .7)).toFixed(3)); }
+      if (end) { const r = end.getBoundingClientRect(); end.style.setProperty('--p', clamp((r.top - window.innerHeight + r.height) / r.height).toFixed(3)); }
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(moveArcs); } }, { passive: true });
+    window.addEventListener('resize', moveArcs);
+    moveArcs();
+  }
 
   // Menu mobile
   const menuBtn = document.querySelector('.menu-btn');
@@ -501,7 +485,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     const MAX_QUESTIONS = 15;
     let asked = 0, busy = false;
     const OFFLINE = 'L’assistant n’est pas disponible pour le moment. Écrivez-nous à [matthys@allia-link.fr](mailto:matthys@allia-link.fr).';
-    const LINK_OK = /^(#[a-z0-9-]+|(index|realisations)\.html(#[a-z0-9-]+)?|mailto:matthys@allia-link\.fr)$/i;
+    const LINK_OK = /^(#[a-z0-9-]+|(index|realisations|a-propos)\.html(#[a-z0-9-]+)?|mailto:matthys@allia-link\.fr)$/i;
     const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     // Mise en forme sûre : paragraphes, listes, gras et liens autorisés uniquement
