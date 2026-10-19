@@ -99,7 +99,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* Sections */
 .sec{padding:clamp(72px,10vw,128px) 0}
 .alt{background:var(--sand)}
-.sec:not(.alt)+.sec:not(.alt){border-top:1px solid var(--line)}
 .sec h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;max-width:18em}
 .sec .sub{margin-top:16px;color:var(--ink-2);font-size:17px;max-width:40em}
 
@@ -341,7 +340,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </section>
 
-<section class="sec" id="realisations" aria-labelledby="real-t">
+<section class="sec alt" id="realisations" aria-labelledby="real-t">
   <div class="wrap">
     <h2 id="real-t">Réalisations</h2>
     <p class="sub">Quatre outils conçus sur mesure, présentés en détail avec leur fonctionnement.</p>
@@ -355,7 +354,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </section>
 
-<section class="sec alt" id="donnees" aria-labelledby="donnees-t">
+<section class="sec" id="donnees" aria-labelledby="donnees-t">
   <div class="wrap">
     <h2 id="donnees-t">Nos engagements</h2>
     <ul class="rules">
