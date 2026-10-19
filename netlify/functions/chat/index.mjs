@@ -19,6 +19,8 @@ const MAX_MESSAGES = 12;
 const MAX_USER_CHARS = 500;
 const MAX_ASSISTANT_CHARS = 4000;
 const MAX_TOKENS = 700;
+// Arrêt net après le résumé, et si le modèle se met à écrire la réplique du visiteur à sa place
+const STOPS = ["[[/RESUME]]", "\nVisiteur :", "\nVisiteur:", "\nUtilisateur :"];
 const TIMEOUT_MS = 9000; // les fonctions Netlify s'arrêtent à 10 s par défaut
 const PER_VISITOR_PER_DAY = Number(process.env.CHAT_LIMIT_VISITOR || 25);
 const PER_DAY_TOTAL = Number(process.env.CHAT_LIMIT_TOTAL || 600);
@@ -127,7 +129,7 @@ export default async (req, context) => {
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT, messages, stop_sequences: STOPS }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (!res.ok) {
@@ -140,8 +142,23 @@ export default async (req, context) => {
       .map((b) => b.text)
       .join("")
       .trim();
-    if (data.stop_reason === "max_tokens") reply = trimToSentence(reply.replace(/\[\[RESUME\]\][\s\S]*$/, ""));
-    if (!reply) return json(502, { error: UNAVAILABLE });
+    if (data.stop_reason === "stop_sequence" && data.stop_sequence === "[[/RESUME]]") reply += "\n[[/RESUME]]";
+    if (data.stop_reason === "max_tokens") {
+      console.error("Réponse coupée faute de place", reply.length, "caractères");
+      const end = reply.indexOf("[[/RESUME]]");
+      if (end >= 0) reply = reply.slice(0, end + "[[/RESUME]]".length);
+      else {
+        // Résumé inachevé : on garde le texte avant lui, et le résumé s'il a au moins deux lignes complètes
+        const start = reply.indexOf("[[RESUME]]");
+        const before = trimToSentence(start >= 0 ? reply.slice(0, start) : reply);
+        const lines = start >= 0 ? reply.slice(start + 10).split("\n").slice(0, -1).filter((l) => l.includes(":")) : [];
+        reply = lines.length >= 2 ? `${before}\n\n[[RESUME]]\n${lines.join("\n")}\n[[/RESUME]]`.trim() : before;
+      }
+    }
+    if (!reply) {
+      console.error("Réponse vide", data.stop_reason, JSON.stringify(data.content || []).slice(0, 300));
+      return json(502, { error: UNAVAILABLE });
+    }
 
     await logExchange(store, day, {
       at: new Date().toISOString(),
