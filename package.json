@@ -1,0 +1,8 @@
+{
+  "name": "site-allia-link",
+  "private": true,
+  "description": "Site allia-link.fr et fonction de l'assistant (Netlify)",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.4"
+  }
+}

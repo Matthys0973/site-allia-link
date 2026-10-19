@@ -156,6 +156,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .typing i:nth-child(3){animation-delay:.3s}
 @keyframes dot{0%,80%,100%{opacity:.25;transform:none}40%{opacity:1;transform:translateY(-2px)}}
 .chat-foot{margin-top:12px;font-size:13px;color:var(--ink-2)}
+.sum{align-self:stretch;margin-top:2px;padding:14px 16px;border:1px solid var(--line-2);border-radius:14px;background:var(--surface);font-size:14px;line-height:1.45}
+.sum-t{font-weight:600;margin-bottom:6px}
+.sum ul{list-style:none;margin:0;padding:0}
+.sum li+li{margin-top:4px}
+.sum li span{color:var(--ink-2)}
+.sum-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:12px;padding:0 18px;border-radius:999px;background:var(--sage);color:var(--on-sage);font-weight:600;font-size:14px;text-decoration:none}
+.sum-btn svg{width:16px;height:16px;stroke:currentColor}
+.sum-note{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
 .chat.started .chat-log{height:360px}
 @media (max-width:860px){.chat-log{max-height:300px}.chat.started .chat-log{height:300px}}
 @media (max-width:420px){.live-tag .opt{display:none}}
@@ -311,7 +319,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
           <button type="submit" class="send" id="chat-send" aria-label="Envoyer la question"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></button>
         </form>
       </div>
-      <p class="chat-foot">Réponses générées par IA à partir du contenu de ce site. N’y saisissez pas d’informations confidentielles.</p>
+      <p class="chat-foot">Réponses générées par IA à partir du contenu de ce site. Les questions sont conservées de façon anonyme pour améliorer l’assistant&nbsp;: n’y saisissez ni information confidentielle ni donnée personnelle.</p>
     </div>
     <div class="chat only-demo" role="group" aria-label="Exemple d’échange avec un assistant de connaissances">
       <div class="chat-head"><span class="dot" aria-hidden="true"></span>Assistant de l’entreprise</div>
@@ -484,6 +492,31 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     const sendBtn = document.getElementById('chat-send');
     const chips = document.getElementById('chat-chips');
     const history = [];
+    const conversation = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const SUMMARY = /\[\[RESUME\]\]([\s\S]*?)(?:\[\[\/RESUME\]\]|$)/;
+    const MAIL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>';
+
+    // Résumé du besoin préparé par l'assistant : carte + e-mail prérempli que le visiteur relit avant d'envoyer
+    function summaryCard(raw) {
+      const lines = raw.split('\n').map(l => l.replace(/^[-•*]\s*/, '').trim()).filter(l => l && !/:\s*\.{3}$/.test(l));
+      if (!lines.length) return null;
+      const items = lines.map(l => {
+        const i = l.indexOf(':');
+        return i > 0 ? '<li><span>' + esc(l.slice(0, i).trim()) + '&nbsp;:</span> ' + esc(l.slice(i + 1).trim()) + '</li>' : '<li>' + esc(l) + '</li>';
+      }).join('');
+      const activity = (lines.find(l => /^activit/i.test(l)) || '').split(':').slice(1).join(':').trim();
+      const subject = 'Demande de diagnostic' + (activity ? ' – ' + activity : '');
+      const body = 'Bonjour,\n\nJe vous écris après un échange avec l’assistant du site. Voici mon besoin en résumé :\n\n'
+        + lines.map(l => '- ' + l).join('\n')
+        + '\n\nPouvons-nous en parler lors d’un diagnostic gratuit ?\n\nBonne journée,\n';
+      const href = 'mailto:matthys@allia-link.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const el = document.createElement('div');
+      el.className = 'sum';
+      el.innerHTML = '<p class="sum-t">Votre besoin en résumé</p><ul>' + items + '</ul>'
+        + '<a class="sum-btn" href="' + href + '">' + MAIL_ICON + 'Envoyer ce résumé par e-mail</a>'
+        + '<p class="sum-note">Votre messagerie s’ouvre avec le message prêt : vous pouvez le relire et le modifier avant l’envoi.</p>';
+      return el;
+    }
     const MAX_QUESTIONS = 15;
     let asked = 0, busy = false;
     const OFFLINE = 'L’assistant n’est pas disponible pour le moment. Écrivez-nous à [matthys@allia-link.fr](mailto:matthys@allia-link.fr).';
@@ -537,7 +570,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         const res = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history.slice(-10) }),
+          body: JSON.stringify({ messages: history.slice(-12), conversation }),
           signal: AbortSignal.timeout ? AbortSignal.timeout(20000) : undefined
         });
         const data = await res.json().catch(() => ({}));
@@ -547,7 +580,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         error = OFFLINE;
       }
       typing.remove();
-      if (reply) { history.push({ role: 'assistant', content: reply }); bubble('bot', render(reply)); }
+      if (reply) {
+        history.push({ role: 'assistant', content: reply });
+        const found = reply.match(SUMMARY);
+        const text = reply.replace(SUMMARY, '').trim();
+        if (text) bubble('bot', render(text));
+        const card = found && summaryCard(found[1]);
+        if (card) { log.appendChild(card); log.scrollTop = log.scrollHeight; }
+      }
       else { history.pop(); bubble('bot', render(error)); }
       setBusy(false);
       if (window.matchMedia('(pointer: fine)').matches) input.focus({ preventScroll: true });

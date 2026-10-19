@@ -1,19 +1,32 @@
 // Assistant en direct du site : reçoit la conversation de la page, interroge Claude, renvoie la réponse.
 // La clé ANTHROPIC_API_KEY est lue dans les variables d'environnement de Netlify, jamais dans le code.
-// Version simple, à enrichir : connaissances, ton et garde-fous sont dans knowledge.mjs.
+// Consignes et connaissances : knowledge.mjs.
+//
+// Stockage (Netlify Blobs, store "assistant") :
+// - limits/<jour>/<empreinte> : nombre de questions du jour pour un visiteur. L'empreinte est un hachage
+//   de son adresse IP qui change chaque jour : l'adresse elle-même n'est jamais enregistrée.
+// - logs/<jour>/<heure>-<id> : question, réponse et identifiant de conversation tiré au hasard par la page.
+//   Rien ne permet de relier une conversation à une personne, sauf ce qu'elle aurait écrit elle-même.
 
+import { createHash, randomUUID } from "node:crypto";
+import { getStore } from "@netlify/blobs";
 import { SYSTEM_PROMPT } from "./knowledge.mjs";
 
 export const config = { path: "/api/chat" };
 
 const MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-5-5";
-const MAX_MESSAGES = 10;
+const MAX_MESSAGES = 12;
 const MAX_USER_CHARS = 500;
 const MAX_ASSISTANT_CHARS = 4000;
+const MAX_TOKENS = 700;
 const TIMEOUT_MS = 9000; // les fonctions Netlify s'arrêtent à 10 s par défaut
+const PER_VISITOR_PER_DAY = Number(process.env.CHAT_LIMIT_VISITOR || 25);
+const PER_DAY_TOTAL = Number(process.env.CHAT_LIMIT_TOTAL || 600);
 
 const UNAVAILABLE =
   "L’assistant n’est pas disponible pour le moment. Écrivez-nous à [matthys@allia-link.fr](mailto:matthys@allia-link.fr).";
+const LIMIT_REACHED =
+  "Vous avez atteint la limite de questions pour aujourd’hui. Pour aller plus loin, [réservez un diagnostic gratuit](#diagnostic) ou écrivez à [matthys@allia-link.fr](mailto:matthys@allia-link.fr).";
 
 const json = (status, body) =>
   new Response(JSON.stringify(body), {
@@ -38,7 +51,52 @@ function cleanMessages(input) {
   return messages;
 }
 
-export default async (req) => {
+// Si la réponse a été coupée faute de place, on la ramène à la dernière phrase complète.
+function trimToSentence(text) {
+  const cut = Math.max(text.lastIndexOf(". "), text.lastIndexOf(".\n"), text.lastIndexOf("?"), text.lastIndexOf("!"));
+  return cut > 40 ? text.slice(0, cut + 1).trim() : text.trim();
+}
+
+function openStore() {
+  try {
+    return getStore("assistant");
+  } catch (e) {
+    console.error("Stockage indisponible", e?.message);
+    return null;
+  }
+}
+
+// Compte une question. Renvoie false si une limite est atteinte. En cas de panne du stockage, on laisse passer.
+async function allowQuestion(store, ip, day) {
+  if (!store) return true;
+  try {
+    const salt = process.env.CHAT_SALT || "allia-link";
+    const who = createHash("sha256").update(`${salt}|${day}|${ip || "inconnu"}`).digest("hex").slice(0, 24);
+    const keyVisitor = `limits/${day}/${who}`;
+    const keyTotal = `limits/${day}/_total`;
+    const [visitor, total] = await Promise.all([store.get(keyVisitor, { type: "json" }), store.get(keyTotal, { type: "json" })]);
+    const v = (visitor?.n || 0) + 1;
+    const t = (total?.n || 0) + 1;
+    if (v > PER_VISITOR_PER_DAY || t > PER_DAY_TOTAL) return false;
+    await Promise.all([store.setJSON(keyVisitor, { n: v }), store.setJSON(keyTotal, { n: t })]);
+    return true;
+  } catch (e) {
+    console.error("Compteur indisponible", e?.message);
+    return true;
+  }
+}
+
+async function logExchange(store, day, entry) {
+  if (!store) return;
+  try {
+    const time = new Date().toISOString().slice(11, 19).replace(/:/g, "");
+    await store.setJSON(`logs/${day}/${time}-${randomUUID().slice(0, 8)}`, entry);
+  } catch (e) {
+    console.error("Journal indisponible", e?.message);
+  }
+}
+
+export default async (req, context) => {
   if (req.method !== "POST") return json(405, { error: "Méthode non autorisée." });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -55,6 +113,11 @@ export default async (req) => {
   }
   const messages = cleanMessages(body?.messages);
   if (!messages) return json(400, { error: "Je n’ai pas compris la question, pouvez-vous la reformuler ?" });
+  const conversation = typeof body?.conversation === "string" ? body.conversation.replace(/[^a-z0-9-]/gi, "").slice(0, 36) : "";
+
+  const day = new Date().toISOString().slice(0, 10);
+  const store = openStore();
+  if (!(await allowQuestion(store, context?.ip, day))) return json(429, { error: LIMIT_REACHED });
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -64,7 +127,7 @@ export default async (req) => {
         "x-api-key": apiKey,
         "anthropic-version": "2023-06-01",
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: 500, system: SYSTEM_PROMPT, messages }),
+      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, system: SYSTEM_PROMPT, messages }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (!res.ok) {
@@ -72,12 +135,21 @@ export default async (req) => {
       return json(502, { error: UNAVAILABLE });
     }
     const data = await res.json();
-    const reply = (data.content || [])
+    let reply = (data.content || [])
       .filter((b) => b.type === "text")
       .map((b) => b.text)
       .join("")
       .trim();
+    if (data.stop_reason === "max_tokens") reply = trimToSentence(reply.replace(/\[\[RESUME\]\][\s\S]*$/, ""));
     if (!reply) return json(502, { error: UNAVAILABLE });
+
+    await logExchange(store, day, {
+      at: new Date().toISOString(),
+      conversation,
+      turn: messages.filter((m) => m.role === "user").length,
+      question: messages[messages.length - 1].content,
+      reply,
+    });
     return json(200, { reply });
   } catch (e) {
     console.error("Appel à l’API impossible", e?.name, e?.message);
