@@ -15,6 +15,7 @@ import { SYSTEM_PROMPT } from "./knowledge.mjs";
 export const config = { path: "/api/chat" };
 
 const MODEL = process.env.ANTHROPIC_MODEL || "claude-haiku-5-5";
+const VERSION = "2026-10-19.3"; // renvoyée dans chaque réponse, pour vérifier quelle version est en ligne
 const MAX_MESSAGES = 12;
 const MAX_USER_CHARS = 500;
 const MAX_ASSISTANT_CHARS = 4000;
@@ -160,7 +161,8 @@ export default async (req, context) => {
     }
     if (!reply) {
       console.error("Réponse vide", data.stop_reason, JSON.stringify(data.content || []).slice(0, 300));
-      return json(502, { error: UNAVAILABLE, code: `vide_${data.stop_reason}` });
+      const types = [...new Set((data.content || []).map((b) => b.type))].join("+") || "rien";
+      return json(502, { error: UNAVAILABLE, code: `vide_${data.stop_reason}_${types}`, v: VERSION });
     }
 
     await logExchange(store, day, {
@@ -170,7 +172,7 @@ export default async (req, context) => {
       question: messages[messages.length - 1].content,
       reply,
     });
-    return json(200, { reply });
+    return json(200, { reply, v: VERSION });
   } catch (e) {
     console.error("Appel à l’API impossible", e?.name, e?.message);
     return json(504, { error: UNAVAILABLE, code: e?.name === "TimeoutError" ? "delai" : "reseau" });
