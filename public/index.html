@@ -583,7 +583,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       if (reply) {
         history.push({ role: 'assistant', content: reply });
         const found = reply.match(SUMMARY);
-        const text = reply.replace(SUMMARY, '').trim();
+        let text = reply.replace(SUMMARY, '').trim();
+        // Sans résumé, pas de bouton : on retire toute phrase qui en annoncerait un
+        if (!found) text = text.split('\n').map(line => line.split(/(?<=[.!?])\s+/).filter(t => !/bouton|e-mail prérempli|résumé déjà prêt/i.test(t)).join(' ')).join('\n').replace(/\n{3,}/g, '\n\n').trim();
         if (text) bubble('bot', render(text));
         const card = found && summaryCard(found[1]);
         if (card) { log.appendChild(card); log.scrollTop = log.scrollHeight; }
