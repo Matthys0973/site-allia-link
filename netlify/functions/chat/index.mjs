@@ -133,8 +133,10 @@ export default async (req, context) => {
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
     if (!res.ok) {
-      console.error("Erreur API Anthropic", res.status, (await res.text()).slice(0, 500));
-      return json(502, { error: UNAVAILABLE });
+      const detail = (await res.text()).slice(0, 500);
+      console.error("Erreur API Anthropic", res.status, detail);
+      const type = (detail.match(/"type"\s*:\s*"([a-z_]+_error)"/) || [])[1] || "";
+      return json(502, { error: UNAVAILABLE, code: `api_${res.status}${type ? "_" + type : ""}` });
     }
     const data = await res.json();
     let reply = (data.content || [])
@@ -157,7 +159,7 @@ export default async (req, context) => {
     }
     if (!reply) {
       console.error("Réponse vide", data.stop_reason, JSON.stringify(data.content || []).slice(0, 300));
-      return json(502, { error: UNAVAILABLE });
+      return json(502, { error: UNAVAILABLE, code: `vide_${data.stop_reason}` });
     }
 
     await logExchange(store, day, {
@@ -170,6 +172,6 @@ export default async (req, context) => {
     return json(200, { reply });
   } catch (e) {
     console.error("Appel à l’API impossible", e?.name, e?.message);
-    return json(504, { error: UNAVAILABLE });
+    return json(504, { error: UNAVAILABLE, code: e?.name === "TimeoutError" ? "delai" : "reseau" });
   }
 };
