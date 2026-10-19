@@ -81,7 +81,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-in{max-width:640px}
 .hero .logo{width:clamp(150px,18vw,214px);margin:0 auto 48px}
 .tagline{text-wrap:balance;font-size:15px;color:var(--ink-2);margin-bottom:12px}
-.hero h1{font-size:clamp(46px,9vw,112px);line-height:1;margin-bottom:28px}
+.hero h1{font-size:clamp(40px,6.5vw,88px);line-height:1.05;margin-bottom:28px}
+.nw{white-space:nowrap}
 .lead{font-size:clamp(17px,1.6vw,19px);color:var(--ink-2);max-width:32em;margin:0 auto}
 
 /* Sections */
@@ -89,7 +90,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .alt{background:var(--sand)}
 .sec h2,.contact h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;max-width:18em}
 .story{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:start}
-.story p{color:var(--ink-2);font-size:18px}
+.story p{color:var(--ink-2);font-size:18px;text-align:justify;hyphens:auto;-webkit-hyphens:auto}
 .story p+p{margin-top:16px}
 @media (max-width:860px){.story{grid-template-columns:1fr;gap:24px}}
 
@@ -182,7 +183,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <div class="hero-in">
     <a href="index.html" aria-label="Allia Link, accueil"><span class="logo" role="img" aria-label="Allia Link"></span></a>
     <p class="tagline">Automatisation IA sur mesure</p>
-    <h1>À propos</h1>
+    <h1>Qui <span class="nw">sommes-nous&#8239;?</span></h1>
     <p class="lead">Allia Link aide les TPE et PME à gagner du temps grâce à l’IA. Nous concevons et construisons nous-mêmes les outils que nous proposons.</p>
   </div>
 </section>
