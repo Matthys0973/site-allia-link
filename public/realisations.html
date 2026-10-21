@@ -5,7 +5,7 @@
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Réalisations – Allia Link</title>
-<meta name="description" content="Quatre outils IA conçus sur mesure par Allia Link : veille territoriale, plan de charge, fiches réglementaires et assistant de connaissances.">
+<meta name="description" content="Quatre outils IA conçus sur mesure par Allia Link : veille automatique, tableau de bord de pilotage, fiches produit générées automatiquement et recherche de documents en une question.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23566D4F'/%3E%3Ccircle cx='32' cy='32' r='23' fill='none' stroke='%238B9BE2' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,138 +83,36 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero h1{font-size:clamp(46px,9vw,112px);line-height:1;margin-bottom:28px}
 .lead{font-size:clamp(17px,1.6vw,19px);color:var(--ink-2);max-width:32em;margin:0 auto}
 
-/* Sommaire */
-.index{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.index .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.index a{display:block;text-decoration:none;padding:30px 24px 34px;border-left:1px solid var(--line)}
-.index a:first-child{border-left:0;padding-left:0}
-.index a:last-child{padding-right:0}
-.index .c{display:block;font-size:14px;color:var(--sage);margin-bottom:8px}
-.index .t{display:block;font-family:var(--serif);font-size:22px;line-height:1.25;text-wrap:balance}
-.index a:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
-@media (max-width:1000px){
-  .index .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .index a{padding:24px 24px 28px}
-  .index a:nth-child(odd){border-left:0;padding-left:0}
-  .index a:nth-child(even){padding-right:0}
-  .index a:nth-child(n+3){border-top:1px solid var(--line)}
-}
-@media (max-width:640px){
-  .index .wrap{grid-template-columns:1fr}
-  .index a,.index a:nth-child(n){border-left:0;border-top:1px solid var(--line);padding:22px 0}
-  .index a:first-child{border-top:0}
-}
+/* Réalisations : quatre cartes */
+.reals{padding:clamp(56px,8vw,104px) 0 clamp(72px,10vw,128px)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px}
+.card{display:grid;grid-row:span 6;grid-template-rows:subgrid;row-gap:0;align-content:start;padding:32px 0 36px;border-top:1px solid var(--line-2)}
+.client{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.card h2{font-size:clamp(26px,2.6vw,32px);line-height:1.15;max-width:16em;margin-bottom:14px}
+.desc{color:var(--ink-2);font-size:16.5px;max-width:32em}
+.result{display:flex;gap:10px;align-items:baseline;margin-top:18px;font-weight:500;font-size:16px;text-align:left}
+.result svg{flex:none;width:18px;height:18px;stroke:var(--sage);transform:translateY(3px)}
+.tools{margin-top:10px;font-size:14px;color:var(--ink-2);text-align:left}
+.more{margin-top:14px}
+.more summary{list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-size:15px;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.more summary::-webkit-details-marker{display:none}
+.more summary svg{width:18px;height:18px;stroke:currentColor;transition:transform .2s ease}
+.more[open] summary svg{transform:rotate(180deg)}
+.more .close-l,.more[open] .open-l{display:none}
+.more[open] .close-l{display:inline}
+.more summary:hover{color:var(--sage)}
+.more ul{margin:8px 0 0;padding:0 0 0 18px;color:var(--ink-2);font-size:15.5px}
+.more li+li{margin-top:8px}
+.more li::marker{color:var(--sage)}
+.shot{margin-top:20px}
+.shot img{border:1px solid var(--line);border-radius:12px;background:#fff}
+.shot figcaption{margin-top:8px;font-size:13.5px;color:var(--ink-2)}
+@media (prefers-reduced-motion:no-preference){.more[open] ul,.more[open] .shot{animation:show .3s ease-out both}}
+@media (max-width:860px){.cards{grid-template-columns:1fr}}
 
-/* Cas clients */
-.case,.data{padding:clamp(72px,10vw,128px) 0}
-.alt{background:var(--sand)}
-.client{font-size:15px;color:var(--sage);margin-bottom:14px}
-.case h2,.data h2,.contact h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;max-width:18em}
-.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:44px}
-.cols h3{font-size:15px;font-weight:600;margin-bottom:8px}
-.cols p{color:var(--ink-2);font-size:16.5px}
-@media (max-width:860px){.cols{grid-template-columns:1fr;gap:24px}}
-
-/* Schéma en étapes : pastilles reprenant le motif du logo */
-.track{list-style:none;margin:64px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px}
-.step{position:relative}
-.step:not(:last-child)::after{content:"";position:absolute;top:20px;left:52px;right:-16px;height:1px;background:var(--line-2)}
-.ring{width:40px;height:40px;border-radius:50%;background:var(--arc);color:var(--on-arc);display:grid;place-items:center;font-size:14px;font-weight:600;box-shadow:inset 0 0 0 4px var(--arc),inset 0 0 0 5.5px var(--ring);margin-bottom:18px}
-.step h4{font-size:16px;font-weight:600;margin-bottom:6px}
-.step p{font-size:15px;color:var(--ink-2);line-height:1.5;max-width:24em}
-@media (max-width:860px){
-  .track{grid-template-columns:1fr;gap:26px}
-  .step{display:grid;grid-template-columns:40px 1fr;column-gap:18px}
-  .ring{margin:0;grid-row:span 2}
-  .step:not(:last-child)::after{top:48px;bottom:-22px;left:20px;right:auto;width:1px;height:auto}
-}
-.loop{display:flex;align-items:center;gap:10px;margin-top:34px;font-size:15px;color:var(--ink-2)}
-.loop svg{flex:none;width:20px;height:20px;stroke:var(--sage)}
-.tools{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink-2)}
-.alt .tools{border-top-color:var(--line-2)}
-.tools strong{font-weight:600;color:var(--ink);margin-right:8px}
-
-/* Capture de l'outil */
-.shot{margin-top:56px}
-.frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
-
-/* Plan de charge (démonstration) */
-.heat{margin-top:56px}
-.heat-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px 6px}
-.hm{border-collapse:separate;border-spacing:4px;min-width:700px;width:100%;font-variant-numeric:tabular-nums}
-.hm thead th{font-size:13px;font-weight:600;color:var(--ink-2);text-align:center;padding:4px 0 8px;line-height:1.25;vertical-align:bottom}
-.hm thead th small{display:block;font-weight:400;font-size:12px}
-.hm thead th.hol::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:var(--peri);margin:6px auto 0}
-.hm thead th:first-child{text-align:left;position:sticky;left:0;z-index:2;background:var(--sand)}
-.hm th[scope=row]{position:sticky;left:0;z-index:1;background:var(--sand);text-align:left;font-weight:400;padding:0;min-width:176px}
-.hm td{background:var(--surface);background:color-mix(in srgb,var(--sage) var(--mix,0%),var(--surface));color:var(--ink);text-align:center;font-size:14px;height:46px;min-width:60px;border-radius:6px;white-space:nowrap}
-.hm td.full{background:var(--sage);color:var(--on-sage)}
-.hm td.over{background:var(--peri);color:var(--on-peri);font-weight:600}
-.who{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:6px 10px 6px 2px;cursor:pointer;border-radius:6px}
-.who:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
-.who svg{flex:none;width:16px;height:16px;stroke:var(--ink-2);transition:transform .2s ease}
-.who[aria-expanded="true"] svg{transform:rotate(90deg)}
-.who .n{display:block;font-weight:600;font-size:15px;line-height:1.25}
-.who .g{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.3}
-.hm tr.det th{font-size:13px;color:var(--ink-2);padding:0 10px 0 28px;white-space:nowrap}
-.hm tr.det td{height:30px;font-size:12.5px;color:var(--ink-2);background:transparent;border-radius:4px}
-.hm tr.det.last td,.hm tr.det.last th{padding-bottom:0}
-.hm tr.det.last td{box-shadow:0 10px 0 -9px var(--line-2)}
-.hm .k{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:8px}
-.hm tr.mis td:not(:empty),.hm tr.mis .k{background:color-mix(in srgb,var(--sage) 22%,var(--surface))}
-.hm tr.int td:not(:empty),.hm tr.int .k{background:color-mix(in srgb,var(--peri) 30%,var(--surface))}
-.hm tr.abs td:not(:empty),.hm tr.abs .k{background:repeating-linear-gradient(135deg,var(--surface) 0 4px,var(--line-2) 4px 5px)}
-.hm tr.free td{color:var(--sage);font-weight:600}
-.hm tr.free td.z{color:var(--ink-2);font-weight:400}
-.hm tr.free .k{background:transparent;box-shadow:inset 0 0 0 1.5px var(--sage)}
-.hm-legend{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:18px;font-size:13.5px;color:var(--ink-2)}
-.ramp{display:inline-flex;gap:3px;margin:0 8px;vertical-align:-2px}
-.ramp i,.sw{display:inline-block;width:18px;height:14px;border-radius:3px;background:color-mix(in srgb,var(--sage) var(--mix,0%),var(--surface))}
-.ramp i.full{background:var(--sage)}
-.sw{margin-right:8px;vertical-align:-2px}
-.sw.over{background:var(--peri)}
-.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--peri);margin-right:8px;vertical-align:1px}
-@media (max-width:600px){.hm th[scope=row]{min-width:140px}.hm tr.det th{padding-left:22px}.who .n{font-size:14.5px}}
-
-/* Assistant réglementaire (illustration) */
-.demo{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px;margin-top:56px;align-items:start}
-.chat{background:var(--sand);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:88%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.45}
-.msg.bot{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
-.msg.me{background:var(--sage);color:var(--on-sage);border-bottom-right-radius:4px;align-self:flex-end}
-.file{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:var(--bg)}
-.file svg{flex:none;width:18px;height:18px;stroke:var(--sage)}
-.doc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:28px 28px 22px}
-.doc-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:14px;border-bottom:2px solid var(--sage)}
-.doc-t{font-family:var(--serif);font-size:24px;line-height:1.2}
-.doc-ref{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
-.doc table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.4}
-.doc th{text-align:left;font-weight:600;font-size:12.5px;color:var(--ink-2);padding:12px 10px 8px 0;border-bottom:1px solid var(--line)}
-.doc td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.doc td:last-child{color:var(--ink-2);font-size:12.5px}
-.todo{display:inline-block;background:color-mix(in srgb,var(--peri) 30%,var(--surface));border-radius:4px;padding:1px 7px;font-weight:600;font-size:12.5px;white-space:nowrap}
-.doc-foot{margin-top:14px;font-size:12.5px;color:var(--ink-2)}
-@media (max-width:860px){.demo{grid-template-columns:1fr}.doc{padding:22px 18px 18px}}
-
-/* Assistant de connaissances */
-.alt .chat{background:var(--surface);border:1px solid var(--line)}
-.alt .msg.bot{background:var(--sand);border-color:transparent}
-.srcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.src{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:5px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
-.src svg{width:14px;height:14px;stroke:var(--sage);flex:none}
-.slide{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.slide-bar{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-2)}
-.slide-body{aspect-ratio:16/9;padding:7% 8%;display:grid;grid-template-rows:auto 1fr;gap:9%}
-.s-title{display:block;height:10px;width:55%;border-radius:3px;background:var(--ink);opacity:.75}
-.s-cols{display:grid;grid-template-columns:3fr 2fr;gap:8%;min-height:0}
-.s-bars{display:flex;align-items:flex-end;gap:8%;height:100%}
-.s-bars i{flex:1;border-radius:3px 3px 0 0;background:var(--sage)}
-.s-bars i:nth-child(odd){background:color-mix(in srgb,var(--sage) 45%,var(--surface))}
-.s-lines{display:grid;gap:10px;align-content:center}
-.s-lines i{display:block;height:6px;border-radius:3px;background:var(--line-2)}
-.s-lines i:first-child{background:var(--peri);width:70%}
-.slide .slide-cap{margin:0;padding:12px 14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+/* Engagements */
+.data{padding:clamp(72px,10vw,128px) 0;background:var(--sand)}
+.data h2,.contact h2{font-size:clamp(32px,4.4vw,50px);line-height:1.1;max-width:18em}
 
 /* Pied de page */
 .foot{border-top:1px solid var(--line);padding:36px 0 44px;font-size:14px;color:var(--ink-2)}
@@ -266,8 +164,7 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
 @media print{
   .nav,body::before{display:none}
   .hero{min-height:auto;padding-top:48px}
-  .case,.data{padding:48px 0}
-  .track,.shot,.heat,.demo,.rules li{break-inside:avoid}
+  .more ul,.shot{display:block}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
@@ -280,11 +177,6 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
     <nav class="nav-links" id="nav-links" aria-label="Sections">
       <a href="index.html">Accueil</a>
       <a href="a-propos.html">À propos</a>
-      <a href="#veille">Veille</a>
-      <a href="#plan-de-charge">Plan de charge</a>
-      <a href="#fiches">Fiches</a>
-      <a href="#savoir">Savoir</a>
-      <a href="#donnees">Données</a>
       <a class="nav-cta" href="index.html#diagnostic">Diagnostic gratuit</a>
     </nav>
     <button type="button" class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu"><svg class="bars" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8.5h16M4 15.5h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
@@ -299,182 +191,82 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
     <a href="index.html" aria-label="Allia Link, accueil"><span class="logo" role="img" aria-label="Allia Link"></span></a>
     <p class="tagline">Automatisation IA sur mesure</p>
     <h1>Réalisations</h1>
-    <p class="lead">Quatre outils conçus sur mesure&nbsp;: veille, pilotage, rédaction réglementaire et accès au savoir de l’entreprise. Chacun remplace un travail manuel répétitif par un outil fiable et sourcé.</p>
+    <p class="lead">Quatre exemples d’outils conçus sur mesure.</p>
   </div>
 </section>
 
-<nav class="index" aria-label="Les trois réalisations">
+<section class="reals" aria-label="Quatre réalisations">
   <div class="wrap">
-    <a href="#veille"><span class="c">Neo Eco</span><span class="t">Repérer les chantiers d’un territoire dès leur annonce</span></a>
-    <a href="#plan-de-charge"><span class="c">Cabinet de conseil</span><span class="t">Savoir qui est disponible avant la réunion du lundi</span></a>
-    <a href="#fiches"><span class="c">Industriel du dispositif médical</span><span class="t">Une fiche réglementaire en 30&nbsp;minutes</span></a>
-    <a href="#savoir"><span class="c">Cabinet de conseil</span><span class="t">Retrouver le savoir de l’entreprise en une question</span></a>
-  </div>
-</nav>
-
-<!-- Cas : Neo Eco -->
-<section class="case" id="veille" aria-labelledby="veille-t">
-  <div class="wrap">
-    <p class="client">Neo Eco, économie circulaire</p>
-    <h2 id="veille-t">Repérer les chantiers d’un territoire dès leur annonce</h2>
-    <div class="cols">
-      <div><h3>Le besoin</h3><p>Les chantiers sont annoncés partout&nbsp;: presse locale, permis de construire, appels d’offres. Plus une opération est repérée tôt, plus on peut organiser le réemploi de ses matériaux et créer des synergies sur le territoire.</p></div>
-      <div><h3>La solution</h3><p>Des agents IA lisent ces sources, extraient chaque opération (lieu, type, stade, surface) et alimentent une carte interactive dans le temps. Les matériaux générés et consommés sont estimés en tonnes.</p></div>
-      <div><h3>Le résultat</h3><p>Plus de 200&nbsp;opérations suivies sur un territoire pilote, de l’annonce aux travaux, mises à jour automatiquement. Neo Eco prévoit de commercialiser l’outil.</p></div>
+    <div class="cards">
+      <article class="card" id="veille" aria-labelledby="veille-t">
+        <p class="client">Neo Eco · économie circulaire</p>
+        <h2 id="veille-t">Veille automatique des opportunités</h2>
+        <p class="desc">Des agents IA lisent la presse, les permis de construire et les appels d’offres, puis regroupent les opportunités sur une carte.</p>
+        <p class="result"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg><span>Plus de 200&nbsp;opportunités repérées, sans recherche manuelle</span></p>
+        <p class="tools">Python · API Claude</p>
+        <details class="more">
+          <summary><span class="open-l">Voir le détail</span><span class="close-l">Masquer le détail</span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul>
+          <li>Sources suivies&nbsp;: presse locale, permis de construire (base nationale Sitadel) et appels d’offres publics.</li>
+          <li>Pour chaque chantier, l’outil relève le lieu, le type, le stade et la surface, et estime les tonnages de matériaux générés et consommés.</li>
+          <li>Les sources sont recoupées et un chef de projet valide. La carte se complète à chaque nouvelle publication.</li>
+          </ul>
+          <figure class="shot"><img src="veille-carte.webp" loading="lazy" width="1600" height="880" decoding="async" alt="Capture de l’outil : carte des opérations autour d’Avignon avec curseur dans le temps, histogramme des gisements de matériaux par type d’opération et répartition des opérations par stade."><figcaption>La carte des opérations et les gisements de matériaux par type d’opération.</figcaption></figure>
+        </details>
+      </article>
+      <article class="card" id="plan-de-charge" aria-labelledby="plan-de-charge-t">
+        <p class="client">Cabinet de conseil</p>
+        <h2 id="plan-de-charge-t">Tableau de bord de pilotage</h2>
+        <p class="desc">Un tableau de bord rassemble les missions, les absences et le temps de chaque consultant au même endroit.</p>
+        <p class="result"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg><span>Suivi des consultants à jour chaque semaine, sans ressaisie</span></p>
+        <p class="tools">Python · Excel</p>
+        <details class="more">
+          <summary><span class="open-l">Voir le détail</span><span class="close-l">Masquer le détail</span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul>
+          <li>Les missions et les absences validées viennent de l’outil de gestion du cabinet, le temps interne et les jours fériés d’un fichier Excel.</li>
+          <li>La charge de chaque consultant est calculée jour par jour, avec une vue d’équipe par semaine et le détail par projet en un clic.</li>
+          <li>Chaque pourcentage renvoie à sa source&nbsp;: une mission, une absence ou une charge interne.</li>
+          </ul>
+        </details>
+      </article>
+      <article class="card" id="fiches" aria-labelledby="fiches-t">
+        <p class="client">Industriel</p>
+        <h2 id="fiches-t">Fiches produit générées automatiquement</h2>
+        <p class="desc">Un assistant retrouve les documents du produit, pose les questions manquantes et rédige la fiche dans le modèle de l’entreprise.</p>
+        <p class="result"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg><span>30&nbsp;minutes au lieu de plusieurs heures par fiche</span></p>
+        <p class="tools">Copilot Studio · Word</p>
+        <details class="more">
+          <summary><span class="open-l">Voir le détail</span><span class="close-l">Masquer le détail</span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul>
+          <li>Il s’agit de fiches réglementaires de dispositifs médicaux, à rédiger dans une trame Word stricte.</li>
+          <li>L’assistant part de la référence du produit, retrouve les rapports d’essais internes, puis complète par une recherche en ligne.</li>
+          <li>Chaque champ cite sa source. Ce qui manque est signalé à compléter, jamais inventé.</li>
+          </ul>
+        </details>
+      </article>
+      <article class="card" id="savoir" aria-labelledby="savoir-t">
+        <p class="client">Cabinet de conseil</p>
+        <h2 id="savoir-t">Retrouver un document en une question</h2>
+        <p class="desc">Un assistant dans Teams cherche dans les dossiers partagés et répond avec le lien vers le bon fichier.</p>
+        <p class="result"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg><span>La bonne information en quelques secondes</span></p>
+        <p class="tools">Copilot Studio · SharePoint · Teams</p>
+        <details class="more">
+          <summary><span class="open-l">Voir le détail</span><span class="close-l">Masquer le détail</span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul>
+          <li>La question se pose en langage courant, directement dans Teams.</li>
+          <li>La réponse renvoie au bon fichier et à la bonne slide, sans fouiller les dossiers.</li>
+          <li>Chacun ne voit que les documents auxquels il a déjà accès.</li>
+          </ul>
+        </details>
+      </article>
     </div>
-    <ol class="track" aria-label="Fonctionnement de l’outil">
-      <li class="step"><span class="ring" aria-hidden="true">1</span><h4>Sources publiques</h4><p>Presse locale, permis de construire (base nationale Sitadel), appels d’offres publics.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">2</span><h4>Agents IA</h4><p>Ils lisent chaque publication et extraient l’opération&nbsp;: lieu, type, stade, surface.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">3</span><h4>Recoupement</h4><p>Les sources sont croisées, un chef de projet valide.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">4</span><h4>Carte et gisements</h4><p>Opérations dans le temps, tonnages de matériaux par type d’opération.</p></li>
-    </ol>
-    <p class="loop"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3.5V8h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20.5V16h-4.5"/></svg>Les agents repassent automatiquement&#8239;; chaque nouvelle publication complète la carte.</p>
-    <figure class="shot">
-      <div class="frame"><img src="veille-carte.webp" loading="lazy" width="1600" height="880" decoding="async" alt="Capture de l’outil : carte des opérations autour d’Avignon avec curseur dans le temps, histogramme des gisements de matériaux par type d’opération et répartition des opérations par stade."></div>
-      <figcaption>L’outil&nbsp;: carte des opérations dans le temps, gisements de matériaux par type d’opération, stade d’avancement.</figcaption>
-    </figure>
-    <p class="tools"><strong>Outils</strong>Python, API Claude, fonds de carte IGN</p>
-  </div>
-</section>
-
-<!-- Cas : plan de charge -->
-<section class="case alt" id="plan-de-charge" aria-labelledby="charge-t">
-  <div class="wrap">
-    <p class="client">Cabinet de conseil en stratégie</p>
-    <h2 id="charge-t">Savoir qui est disponible avant la réunion du lundi</h2>
-    <div class="cols">
-      <div><h3>Le besoin</h3><p>Chaque lundi, la direction affecte les consultants aux missions. Les informations étaient dispersées entre l’outil de gestion, les demandes d’absence et un fichier Excel tenu à la main.</p></div>
-      <div><h3>La solution</h3><p>Un tableau de bord récupère les missions et les absences validées dans BoondManager, le temps interne et les jours fériés dans Excel, puis calcule la charge de chaque consultant, jour par jour.</p></div>
-      <div><h3>Le résultat</h3><p>Un plan de charge actualisé chaque semaine, sans ressaisie. Chaque pourcentage renvoie à sa source&nbsp;: une mission, une absence ou une charge interne.</p></div>
-    </div>
-    <ol class="track" aria-label="Fonctionnement du tableau de bord">
-      <li class="step"><span class="ring" aria-hidden="true">1</span><h4>Sources</h4><p>Missions et absences (BoondManager), temps interne et jours fériés (Excel).</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">2</span><h4>Calcul</h4><p>Charge de chaque consultant, jour par jour, absences et fériés déduits.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">3</span><h4>Tableau de bord</h4><p>Vue d’équipe par semaine, détail par projet en un clic.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">4</span><h4>Décision</h4><p>La réunion de staffing du lundi part de chiffres à jour.</p></li>
-    </ol>
-    <p class="loop"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3.5V8h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20.5V16h-4.5"/></svg>Actualisé automatiquement chaque semaine, avant la réunion du lundi.</p>
-    <figure class="heat">
-      <div class="heat-scroll">
-        <table class="hm" id="hm">
-          <caption class="sr-only">Charge hebdomadaire de l’équipe, en pourcentage du temps disponible. Données fictives.</caption>
-          <thead><tr>
-            <th scope="col">Équipe</th>
-            <th scope="col">S44<small>26 oct.</small></th>
-            <th scope="col">S45<small>2 nov.</small></th>
-            <th scope="col" class="hol" title="11 novembre, jour férié">S46<small>9 nov.</small></th>
-            <th scope="col">S47<small>16 nov.</small></th>
-            <th scope="col">S48<small>23 nov.</small></th>
-            <th scope="col">S49<small>30 nov.</small></th>
-            <th scope="col">S50<small>7 déc.</small></th>
-            <th scope="col">S51<small>14 déc.</small></th>
-          </tr></thead>
-        </table>
-      </div>
-      <div class="hm-legend">
-        <span>Disponible<span class="ramp" aria-hidden="true"><i style="--mix:10%"></i><i style="--mix:20%"></i><i style="--mix:34%"></i><i style="--mix:48%"></i><i class="full"></i></span>Complet</span>
-        <span><i class="sw over" aria-hidden="true"></i>Surcharge</span>
-        <span><i class="dot" aria-hidden="true"></i>Semaine avec jour férié, déduit automatiquement</span>
-      </div>
-      <figcaption>Démonstration avec des données fictives. Sélectionnez un nom pour afficher le détail par projet.</figcaption>
-    </figure>
-    <p class="tools"><strong>Outils</strong>Python, BoondManager, Excel</p>
-  </div>
-</section>
-
-<!-- Cas : fiches réglementaires -->
-<section class="case" id="fiches" aria-labelledby="fiches-t">
-  <div class="wrap">
-    <p class="client">Industriel du dispositif médical</p>
-    <h2 id="fiches-t">Une fiche réglementaire en 30&nbsp;minutes au lieu de plusieurs heures</h2>
-    <div class="cols">
-      <div><h3>Le besoin</h3><p>Pour chaque produit, l’équipe rédige une fiche ICC (interactions contenant-contenu)&nbsp;: rassembler les rapports d’essais, justifier chaque point, respecter une trame Word stricte. Plusieurs heures par fiche.</p></div>
-      <div><h3>La solution</h3><p>Un assistant conversationnel demande la référence du produit, retrouve les documents internes correspondants, complète par une recherche en ligne et pose des questions quand une information manque. Il génère ensuite la fiche Word, dans la trame de l’entreprise.</p></div>
-      <div><h3>Le résultat</h3><p>30&nbsp;minutes par fiche au lieu de plusieurs heures. Chaque champ cite sa source&#8239;; ce qui manque est signalé à compléter, jamais inventé.</p></div>
-    </div>
-    <ol class="track" aria-label="Fonctionnement de l’assistant">
-      <li class="step"><span class="ring" aria-hidden="true">1</span><h4>Référence produit</h4><p>L’assistant ne retient que les documents de ce produit.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">2</span><h4>Recherche</h4><p>Rapports d’essais internes, puis sources en ligne.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">3</span><h4>Questions</h4><p>Si une information manque, l’assistant la demande.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">4</span><h4>Fiche Word</h4><p>Générée dans la trame de l’entreprise, chaque champ sourcé.</p></li>
-    </ol>
-    <div class="demo">
-      <div class="chat" role="group" aria-label="Exemple d’échange avec l’assistant">
-        <p class="msg bot">Quelle est la référence du produit&#8239;?</p>
-        <p class="msg me">REF-2041</p>
-        <p class="msg bot">J’ai trouvé deux documents pour cette référence&nbsp;: le rapport d’essais précliniques et l’évaluation biologique. Il me manque la durée de contact maximale. Pouvez-vous la préciser&#8239;?</p>
-        <p class="msg me">7&nbsp;jours</p>
-        <div class="msg bot">La fiche est prête&nbsp;: 68&nbsp;champs remplis et sourcés, 3&nbsp;à compléter.
-          <span class="file"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>Fiche_ICC_REF-2041.docx</span>
-        </div>
-      </div>
-      <div class="doc" role="group" aria-label="Extrait de la fiche générée">
-        <div class="doc-head"><span class="doc-t">Fiche ICC</span><span class="doc-ref">REF-2041</span></div>
-        <table>
-          <thead><tr><th scope="col">Point de contrôle</th><th scope="col">Conclusion</th><th scope="col">Source</th></tr></thead>
-          <tbody>
-            <tr><td>Composition du contenant</td><td>Conforme</td><td>Rapport d’essais précliniques, §&nbsp;3.2</td></tr>
-            <tr><td>Extractibles et relargables</td><td>Conforme</td><td>Évaluation biologique, §&nbsp;5.1</td></tr>
-            <tr><td>Durée de contact maximale</td><td>7&nbsp;jours</td><td>Précisée par l’utilisateur</td></tr>
-            <tr><td>Adsorption du principe actif</td><td><span class="todo">À compléter</span></td><td>Aucune source trouvée</td></tr>
-          </tbody>
-        </table>
-        <p class="doc-foot">Extrait illustratif. Le document final reprend la trame Word de l’entreprise.</p>
-      </div>
-    </div>
-    <p class="tools"><strong>Outils</strong>Microsoft Copilot Studio, Power Automate, Word</p>
-  </div>
-</section>
-
-<!-- Cas : assistant de connaissances -->
-<section class="case alt" id="savoir" aria-labelledby="savoir-t">
-  <div class="wrap">
-    <p class="client">Cabinet de conseil en stratégie</p>
-    <h2 id="savoir-t">Retrouver le savoir de l’entreprise en posant une question</h2>
-    <div class="cols">
-      <div><h3>Le besoin</h3><p>Des années de livrables, de méthodes et de retours d’expérience rangés dans SharePoint, mais difficiles à retrouver. Faute de temps, on refait ce qui existe déjà.</p></div>
-      <div><h3>La solution</h3><p>Un assistant disponible dans Teams interroge la base documentaire et répond en citant ses sources, avec un lien direct vers le bon fichier et la bonne slide. Chacun ne voit que les documents auxquels il a déjà accès.</p></div>
-      <div><h3>Le résultat</h3><p>La bonne information en quelques secondes, sans fouiller les dossiers. Les contenus existants sont réutilisés au lieu d’être refaits.</p></div>
-    </div>
-    <ol class="track" aria-label="Fonctionnement de l’assistant de connaissances">
-      <li class="step"><span class="ring" aria-hidden="true">1</span><h4>Question</h4><p>Posée en langage courant, directement dans Teams.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">2</span><h4>Recherche</h4><p>Dans la base documentaire, selon les droits d’accès de chacun.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">3</span><h4>Réponse sourcée</h4><p>Avec le lien direct vers le fichier et la slide concernés.</p></li>
-      <li class="step"><span class="ring" aria-hidden="true">4</span><h4>Réutilisation</h4><p>On part d’un contenu validé plutôt que d’une page blanche.</p></li>
-    </ol>
-    <div class="demo">
-      <div class="chat" role="group" aria-label="Exemple d’échange avec l’assistant de connaissances">
-        <p class="msg me">As-tu une méthode de cadrage pour un projet de réduction des coûts&#8239;?</p>
-        <div class="msg bot">Oui. La méthode de cadrage en cinq étapes est détaillée dans le guide méthodologique, et un retour d’expérience montre son application chez un industriel.
-          <span class="srcs">
-            <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>Guide_cadrage.pptx, slide&nbsp;6</span>
-            <span class="src"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>REX_reduction_couts.pptx, slide&nbsp;14</span>
-          </span>
-        </div>
-        <p class="msg me">Montre-moi la slide 14.</p>
-        <p class="msg bot">Voici le lien direct&nbsp;: elle s’ouvre à la bonne page dans SharePoint.</p>
-      </div>
-      <figure class="slide">
-        <div class="slide-bar"><span>REX_reduction_couts.pptx</span><span>Slide&nbsp;14</span></div>
-        <div class="slide-body" aria-hidden="true">
-          <i class="s-title"></i>
-          <div class="s-cols">
-            <div class="s-bars"><i style="height:42%"></i><i style="height:66%"></i><i style="height:54%"></i><i style="height:82%"></i><i style="height:71%"></i></div>
-            <div class="s-lines"><i></i><i></i><i></i><i style="width:80%"></i></div>
-          </div>
-        </div>
-        <figcaption class="slide-cap">Le lien cité ouvre directement la slide concernée. Illustration.</figcaption>
-      </figure>
-    </div>
-    <p class="tools"><strong>Outils</strong>Microsoft Copilot Studio, SharePoint, Teams</p>
   </div>
 </section>
 
 <!-- Confidentialité -->
 <section class="data" id="donnees" aria-labelledby="donnees-t">
   <div class="wrap">
-    <h2 id="donnees-t">Vos données restent les vôtres</h2>
-    <p class="sub">Quatre règles appliquées à chaque projet.</p>
+    <h2 id="donnees-t">Nos engagements</h2>
     <ul class="rules">
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.2V20h14V9.2"/><path d="M10 20v-5h4v5"/></svg>
@@ -497,7 +289,6 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
         <p>Chaque information produite renvoie à sa source, et une personne de votre équipe valide avant usage.</p>
       </li>
     </ul>
-    <p class="note">Pour les données sensibles, le choix du modèle d’IA et de son hébergement se décide avec vous.</p>
   </div>
 </section>
 
@@ -560,84 +351,15 @@ figcaption{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
     nav.classList.add('past');
   }
 
-  // Plan de charge : données fictives (missions, temps interne, absences et fériés, en % de la semaine)
-  const NB = '\u202F';
-  const P = [
-    { n: 'Claire', g: 'Partner', m: [['Mission énergie', [20,20,20,30,30,20,20,20]]], i: [40,40,30,40,40,40,40,30], a: [0,0,20,0,0,0,0,20] },
-    { n: 'Julien', g: 'Manager', m: [['Mission industrie', [60,60,40,60,60,60,60,40]], ['Mission énergie', [20,20,20,20,30,40,20,0]]], i: [10,10,10,10,10,10,10,10], a: [0,0,20,0,0,0,0,40] },
-    { n: 'Sofia', g: 'Consultante senior', m: [['Mission industrie', [100,100,80,100,90,0,0,0]], ['Mission santé', [0,0,0,0,0,40,40,40]]], i: [0,0,0,0,10,20,20,20], a: [0,0,20,0,0,0,0,0] },
-    { n: 'Thomas', g: 'Consultant senior', m: [['Mission transport', [80,80,40,0,0,0,0,0]]], i: [0,0,20,20,20,20,20,0], a: [0,0,20,0,0,0,0,100] },
-    { n: 'Inès', g: 'Consultante', m: [['Mission industrie', [100,100,80,100,100,100,100,80]]], i: [10,0,0,0,0,0,0,0], a: [0,0,20,0,0,0,0,20] },
-    { n: 'Paul', g: 'Consultant', m: [['Mission énergie', [60,60,60,60,0,0,0,0]]], i: [20,20,0,20,40,40,20,20], a: [0,0,20,0,0,0,0,0] },
-    { n: 'Léa', g: 'Stagiaire', m: [['Mission santé', [50,50,40,50,50,50,50,50]]], i: [30,30,20,30,30,30,30,30], a: [0,0,20,0,0,0,0,0] }
-  ];
-  const table = document.getElementById('hm');
-  const pct = v => v + NB + '%';
-  const chevron = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>';
 
-  P.forEach((p, idx) => {
-    const tb = document.createElement('tbody');
-    const total = p.i.map((_, w) => p.i[w] + p.a[w] + p.m.reduce((s, r) => s + r[1][w], 0));
-    const free = total.map(t => Math.max(0, 100 - t));
-
-    const sum = document.createElement('tr');
-    const th = document.createElement('th');
-    th.scope = 'row';
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'who';
-    btn.innerHTML = chevron + '<span><span class="n"></span><span class="g"></span></span>';
-    btn.querySelector('.n').textContent = p.n;
-    btn.querySelector('.g').textContent = p.g;
-    th.appendChild(btn);
-    sum.appendChild(th);
-    total.forEach(t => {
-      const td = document.createElement('td');
-      td.textContent = pct(t);
-      if (t > 100) td.className = 'over';
-      else if (t === 100) td.className = 'full';
-      else td.style.setProperty('--mix', (t ? 6 + 50 * Math.pow(t / 100, 1.6) : 0).toFixed(1) + '%');
-      sum.appendChild(td);
-    });
-    tb.appendChild(sum);
-
-    const rows = [
-      ...p.m.map(r => [r[0], r[1], 'mis']),
-      ['Temps interne', p.i, 'int'],
-      ['Absences et fériés', p.a, 'abs'],
-      ['Disponible', free, 'free']
-    ];
-    const ids = [];
-    rows.forEach((r, k) => {
-      const tr = document.createElement('tr');
-      tr.className = 'det ' + r[2] + (k === rows.length - 1 ? ' last' : '');
-      tr.id = 'd' + idx + '-' + k;
-      tr.hidden = true;
-      ids.push(tr.id);
-      const h = document.createElement('th');
-      h.scope = 'row';
-      h.innerHTML = '<i class="k" aria-hidden="true"></i>';
-      h.append(r[0]);
-      tr.appendChild(h);
-      r[1].forEach(v => {
-        const td = document.createElement('td');
-        if (r[2] === 'free') { td.textContent = pct(v); if (!v) td.className = 'z'; }
-        else if (v) td.textContent = pct(v);
-        tr.appendChild(td);
-      });
-      tb.appendChild(tr);
-    });
-
-    btn.setAttribute('aria-controls', ids.join(' '));
-    btn.setAttribute('aria-expanded', 'false');
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') !== 'true';
-      btn.setAttribute('aria-expanded', String(open));
-      tb.querySelectorAll('tr.det').forEach(tr => { tr.hidden = !open; });
-    });
-    table.appendChild(tb);
-    if (idx === 1) btn.click();
-  });
+  // Réalisations : le détail s'ouvre seul quand on arrive par un lien vers une carte
+  const openFromHash = () => {
+    const card = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!card || !card.classList.contains('card')) return;
+    card.querySelector('details').open = true;
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
 })();
 </script>
 </body>
