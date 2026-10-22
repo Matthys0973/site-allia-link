@@ -11,7 +11,7 @@
   },
   // Garde les variables saisies dans le tableau de bord (les secrets, eux, sont toujours conservés)
   "keep_vars": true,
-  "observability": { "enabled": true }
-  // Base D1 de l'assistant : à ajouter une fois créée dans le tableau de bord, avec son identifiant
-  // "d1_databases": [{ "binding": "DB", "database_name": "allia-link", "database_id": "..." }]
+  "observability": { "enabled": true },
+  // Base D1 de l'assistant : limite de questions et historique anonyme (tables créées au premier appel)
+  "d1_databases": [{ "binding": "DB", "database_name": "allia-link", "database_id": "754cd8f1-b642-41bd-91ca-85910e805ace" }]
 }
