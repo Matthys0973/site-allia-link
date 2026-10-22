@@ -1,10 +1,11 @@
-// Assistant en direct du site, version Cloudflare Pages Functions (route /api/chat).
+// Assistant en direct du site (route /api/chat), appelé par worker/index.js.
 // Reçoit la conversation de la page, interroge Claude, renvoie la réponse.
 // Consignes et connaissances : server/knowledge.mjs.
 //
-// Réglages dans Cloudflare (projet Pages > Settings) :
-// - variable secrète ANTHROPIC_API_KEY (obligatoire)
-// - liaison D1 nommée DB (facultative : sans elle, pas de limite ni d'historique, l'assistant répond quand même)
+// Réglages :
+// - secret ANTHROPIC_API_KEY, à saisir dans Cloudflare (application > Settings > Variables and Secrets)
+// - base D1 liée sous le nom DB, déclarée dans wrangler.jsonc (facultative : sans elle, pas de limite
+//   ni d'historique, l'assistant répond quand même)
 // - variables facultatives : ANTHROPIC_MODEL, CHAT_LIMIT_VISITOR, CHAT_LIMIT_TOTAL, CHAT_SALT
 //
 // Base D1 (tables créées automatiquement au premier appel) :
@@ -12,9 +13,9 @@
 //   qui change chaque jour : l'adresse elle-même n'est jamais enregistrée.
 // - logs : question, réponse et identifiant de conversation tiré au hasard par la page.
 
-import { SYSTEM_PROMPT } from "../../server/knowledge.mjs";
+import { SYSTEM_PROMPT } from "./knowledge.mjs";
 
-const VERSION = "2026-10-22.1"; // renvoyée dans chaque réponse, pour vérifier quelle version est en ligne
+const VERSION = "2026-10-22.2"; // renvoyée dans chaque réponse, pour vérifier quelle version est en ligne
 const MAX_MESSAGES = 12;
 const MAX_USER_CHARS = 500;
 const MAX_ASSISTANT_CHARS = 4000;
@@ -118,7 +119,9 @@ async function logExchange(env, entry) {
   }
 }
 
-export async function onRequestPost({ request, env, waitUntil }) {
+export async function handleChat(request, env, ctx) {
+  if (request.method !== "POST") return json(405, { error: "Méthode non autorisée." });
+  const waitUntil = (p) => ctx.waitUntil(p);
   const apiKey = env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.error("ANTHROPIC_API_KEY manquante dans les variables Cloudflare");
@@ -197,8 +200,4 @@ export async function onRequestPost({ request, env, waitUntil }) {
     console.error("Appel à l’API impossible", e?.name, e?.message);
     return json(504, { error: UNAVAILABLE, code: e?.name === "TimeoutError" ? "delai" : "reseau", v: VERSION });
   }
-}
-
-export function onRequest() {
-  return json(405, { error: "Méthode non autorisée." });
 }

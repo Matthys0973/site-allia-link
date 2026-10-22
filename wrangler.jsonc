@@ -1,0 +1,17 @@
+// Configuration de l'application Cloudflare (Workers avec fichiers statiques).
+// Le nom doit être identique à celui de l'application créée dans le tableau de bord.
+{
+  "name": "allia-link",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  // Garde les variables saisies dans le tableau de bord (les secrets, eux, sont toujours conservés)
+  "keep_vars": true,
+  "observability": { "enabled": true }
+  // Base D1 de l'assistant : à ajouter une fois créée dans le tableau de bord, avec son identifiant
+  // "d1_databases": [{ "binding": "DB", "database_name": "allia-link", "database_id": "..." }]
+}
