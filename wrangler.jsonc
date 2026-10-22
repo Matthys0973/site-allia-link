@@ -1,7 +1,7 @@
 // Configuration de l'application Cloudflare (Workers avec fichiers statiques).
 // Le nom doit être identique à celui de l'application créée dans le tableau de bord.
 {
-  "name": "allia-link",
+  "name": "site-allia-link",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   "assets": {

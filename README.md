@@ -13,7 +13,7 @@ Site vitrine d'Allia Link, publié sur Cloudflare (application Workers avec fich
 ## Réglages de l'application Cloudflare
 
 - Créée depuis Workers & Pages > Create application, en important le dépôt Matthys0973/site-allia-link.
-- Nom de l'application : `allia-link`, identique au champ `name` de `wrangler.jsonc`. Branche de production : `main`.
+- Nom de l'application : `site-allia-link`, identique au champ `name` de `wrangler.jsonc`. Branche de production : `main`.
 - Commande de build : vide. Commande de déploiement : `npx wrangler deploy`. Dossier racine : vide.
 - Secret `ANTHROPIC_API_KEY` (Settings > Variables and Secrets, type Secret) : la clé de l'API Claude. Elle ne doit jamais être ajoutée au dépôt.
 - Base D1 `allia-link` : créée dans Storage & Databases > D1, puis déclarée dans `wrangler.jsonc` sous le nom `DB` avec son identifiant. Elle sert à la limite de questions et à l'historique anonyme. Les tables se créent seules au premier appel.
