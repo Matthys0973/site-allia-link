@@ -9,3 +9,7 @@ node_modules/
 # Fichiers système
 .DS_Store
 Thumbs.db
+
+# Cloudflare en local
+.dev.vars
+.wrangler/

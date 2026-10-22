@@ -10,7 +10,7 @@
 
 import { createHash, randomUUID } from "node:crypto";
 import { getStore } from "@netlify/blobs";
-import { SYSTEM_PROMPT } from "./knowledge.mjs";
+import { SYSTEM_PROMPT } from "../../../server/knowledge.mjs";
 
 export const config = { path: "/api/chat" };
 
