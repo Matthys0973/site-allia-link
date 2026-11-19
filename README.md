@@ -31,6 +31,16 @@ En cas de souci, on peut masquer le chat en passant `data-live-chat="on"` à `"o
 
 Quand le contenu du site change, penser à mettre à jour `server/knowledge.mjs` pour que l'assistant reste juste.
 
+## Page privée du salon
+
+`allia-link.fr/salon` sert sur un salon : on saisit le mail d'un contact et une note dictée sur l'échange, l'IA rédige le mail de suivi, on le relit puis on l'envoie depuis la messagerie du téléphone. Le bouton « Afficher mon QR contact » montre un QR code vers la fiche contact.
+
+- `public/salon.html` : la page (non référencée). Le code d'accès est demandé une fois, puis gardé sur le téléphone.
+- `server/salon.mjs` : la route `/api/salon` et les consignes de rédaction du mail.
+- `public/contact/matthys.vcf` : la fiche contact (photo, téléphone, mail, site), servie sur `/matthys.vcf`.
+- Secret obligatoire `SALON_CODE` (Settings > Variables and Secrets, type Secret) : le code d'accès. Sans lui, la page refuse tout.
+- Chaque mail préparé est enregistré dans la base D1, table `salon_leads`. Pour la liste des contacts à relancer : `SELECT at, email, note FROM salon_leads ORDER BY id DESC`.
+
 ## Tester en local
 
 ```
