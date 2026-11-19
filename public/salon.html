@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFAF4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Allia Link – Salon</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23566D4F'/%3E%3Ccircle cx='32' cy='32' r='23' fill='none' stroke='%238B9BE2' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/timeless-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+@font-face{font-family:"Timeless";src:url("fonts/timeless-regular.woff2") format("woff2");font-weight:400;font-display:swap}
+:root{
+  --bg:#FFFAF4;--surface:#FFFFFF;--sand:#F6F0E6;--ink:#2C3829;--ink-2:#5E6A5A;--line:#E6DED1;
+  --sage:#566D4F;--on-sage:#FFFAF4;--peri:#8B9BE2;--err:#9A3B2E;
+  --serif:"Timeless","Iowan Old Style",Palatino,Georgia,serif;
+  --sans:"Instrument Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-text-size-adjust:100%}
+main{max-width:520px;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{font-family:var(--serif);font-size:26px;color:var(--sage);line-height:1}
+.brand small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.38em;color:var(--ink-2);margin-top:3px}
+.count{font-size:13px;color:var(--ink-2)}
+h1{font-family:var(--serif);font-weight:400;font-size:24px;margin:0 0 14px}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.hint{font-weight:400;color:var(--ink-2)}
+input,textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 14px;outline:none}
+input:focus,textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(86,109,79,.15)}
+textarea{resize:vertical;min-height:120px}
+#corps{min-height:300px;font-size:15.5px;line-height:1.5}
+button,.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;margin-top:14px;font:inherit;font-size:17px;font-weight:600;border:0;border-radius:999px;background:var(--sage);color:var(--on-sage);text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button.ghost,.btn.ghost{background:transparent;color:var(--sage);border:1.5px solid var(--sage)}
+button.link{background:none;color:var(--ink-2);min-height:40px;font-weight:500;font-size:15px;text-decoration:underline;text-underline-offset:4px}
+button:disabled{opacity:.55}
+.row{display:flex;gap:10px}.row>*{flex:1}
+.msg{margin-top:12px;font-size:14.5px;color:var(--err);min-height:1em}
+.ok{color:var(--sage)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.spin{width:18px;height:18px;border:2.5px solid rgba(255,250,244,.4);border-top-color:var(--on-sage);border-radius:50%;animation:s .8s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+[hidden]{display:none!important}
+#qr{text-align:center}
+#qr svg{width:min(78vw,340px);height:auto;background:#fff;border-radius:18px;padding:10px;border:1px solid var(--line)}
+#qr p{color:var(--ink-2);margin:10px 0 0}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">Allia<small>LINK</small></div>
+    <div class="count" id="count"></div>
+  </header>
+
+  <!-- 1. Code d'accès, demandé une seule fois sur ce téléphone -->
+  <section id="v-code" hidden>
+    <h1>Accès</h1>
+    <label for="code">Code</label>
+    <input id="code" type="password" autocomplete="current-password" inputmode="text">
+    <button id="b-code" type="button">Entrer</button>
+    <div class="msg" id="m-code" role="alert"></div>
+  </section>
+
+  <!-- 2. Saisie : mail du contact + note dictée -->
+  <section id="v-form" hidden>
+    <h1>Nouveau contact</h1>
+    <label for="email">Son adresse mail</label>
+    <input id="email" type="email" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="prenom.nom@mairie.fr" inputmode="email">
+    <label for="note">Note sur l'échange <span class="hint">(micro du clavier)</span></label>
+    <textarea id="note" placeholder="Mme Martin, DGS mairie de 12 000 habitants. Passe des heures à préparer les comptes rendus du conseil et à répondre aux mêmes questions des élus."></textarea>
+    <button id="b-gen" type="button">Préparer le mail</button>
+    <div class="msg" id="m-form" role="alert"></div>
+    <button id="b-qr" class="ghost" type="button">Afficher mon QR contact</button>
+  </section>
+
+  <!-- 3. Relecture puis envoi depuis la messagerie du téléphone -->
+  <section id="v-mail" hidden>
+    <h1>Relire et envoyer</h1>
+    <label for="dest">À</label>
+    <input id="dest" type="email" autocapitalize="off" spellcheck="false" inputmode="email">
+    <label for="objet">Objet</label>
+    <input id="objet" type="text">
+    <label for="corps">Message</label>
+    <textarea id="corps"></textarea>
+    <a id="b-send" class="btn" href="#">Envoyer depuis ma messagerie</a>
+    <div class="row">
+      <button id="b-copy" class="ghost" type="button">Copier</button>
+      <button id="b-redo" class="ghost" type="button">Refaire</button>
+    </div>
+    <div class="msg" id="m-mail" role="status"></div>
+    <button id="b-next" class="link" type="button">Contact suivant</button>
+  </section>
+
+  <!-- QR vers la fiche contact (photo, téléphone, mail, site) -->
+  <section id="v-qr" hidden>
+    <div id="qr">
+      <svg role="img" aria-label="QR code vers la fiche contact" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" class="segno"><path class="qrline" stroke="#2c3829" d="M2 2.5h7m1 0h3m1 0h1m2 0h2m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m2 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h5m2 0h2m3 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h2m5 0h2m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h5m1 0h7m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m2 0h1m2 0h4m3 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-18 1h1m1 0h1m1 0h2m3 0h1m-21 1h1m2 0h9m1 0h1m2 0h2m1 0h3m2 0h1m1 0h3m-29 1h3m1 0h2m2 0h1m4 0h1m2 0h1m2 0h1m3 0h2m1 0h2m-27 1h2m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m-27 1h1m1 0h3m2 0h2m1 0h4m2 0h8m1 0h1m2 0h1m-29 1h1m1 0h2m2 0h1m2 0h2m1 0h2m1 0h2m2 0h5m4 0h1m-27 1h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h2m7 0h7m-24 1h2m2 0h2m1 0h2m1 0h2m2 0h1m4 0h1m1 0h1m1 0h1m-28 1h1m1 0h1m1 0h1m4 0h1m1 0h1m2 0h1m2 0h2m1 0h3m2 0h1m1 0h1m-25 1h1m1 0h2m1 0h1m1 0h2m1 0h2m3 0h2m2 0h1m1 0h1m-26 1h2m1 0h1m3 0h2m2 0h1m1 0h3m2 0h2m4 0h1m1 0h2m-28 1h2m1 0h2m1 0h1m3 0h1m4 0h1m1 0h3m3 0h3m2 0h1m-29 1h3m2 0h1m1 0h1m3 0h2m1 0h2m2 0h1m1 0h1m2 0h1m1 0h2m-27 1h3m2 0h6m2 0h5m2 0h8m-20 1h4m2 0h2m1 0h1m2 0h1m3 0h2m-26 1h7m1 0h3m3 0h2m1 0h4m1 0h1m1 0h2m-26 1h1m5 0h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h3m3 0h7m1 0h2m-29 1h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h2m2 0h1m1 0h1m6 0h1m-29 1h1m1 0h3m1 0h1m2 0h2m1 0h7m1 0h2m1 0h2m1 0h3m-29 1h1m5 0h1m4 0h1m1 0h1m1 0h1m7 0h4m1 0h1m-29 1h7m1 0h3m2 0h1m4 0h3m2 0h2"/></svg>
+      <p>Scannez pour enregistrer mon contact</p>
+    </div>
+    <button id="b-back" class="ghost" type="button">Retour</button>
+  </section>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const views = ["v-code", "v-form", "v-mail", "v-qr"];
+  const show = (v) => { views.forEach((x) => ($(x).hidden = x !== v)); window.scrollTo(0, 0); };
+
+  // Le stockage local peut être indisponible (navigation privée) : on garde alors tout en mémoire.
+  const mem = {};
+  const store = {
+    get: (k) => { try { return localStorage.getItem(k); } catch { return mem[k] ?? null; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch { mem[k] = v; } },
+    del: (k) => { try { localStorage.removeItem(k); } catch { delete mem[k]; } },
+  };
+
+  let code = store.get("salon_code") || "";
+  let lastNote = "";
+
+  const today = new Date().toISOString().slice(0, 10);
+  const refreshCount = () => {
+    const n = Number(store.get("salon_n_" + today) || 0);
+    $("count").textContent = n ? n + (n > 1 ? " contacts aujourd'hui" : " contact aujourd'hui") : "";
+  };
+
+  async function call(payload) {
+    const res = await fetch("/api/salon", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code, ...payload }),
+    });
+    let data = {};
+    try { data = await res.json(); } catch {}
+    if (res.status === 401) { store.del("salon_code"); code = ""; show("v-code"); }
+    if (!res.ok) throw new Error(data.error || "Erreur " + res.status);
+    return data;
+  }
+
+  // Code
+  $("b-code").onclick = async () => {
+    code = $("code").value.trim();
+    $("m-code").textContent = "";
+    try { await call({ check: true }); store.set("salon_code", code); show("v-form"); $("email").focus(); }
+    catch (e) { $("m-code").textContent = e.message; }
+  };
+  $("code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("b-code").click(); });
+
+  // Préparer le mail
+  const setBusy = (busy) => {
+    const b = $("b-gen");
+    b.disabled = busy;
+    b.innerHTML = busy ? '<span class="spin"></span>Rédaction…' : "Préparer le mail";
+  };
+  async function generate(note) {
+    $("m-form").textContent = "";
+    setBusy(true);
+    try {
+      const mail = await call({ email: $("email").value.trim(), note });
+      lastNote = note;
+      $("dest").value = $("email").value.trim();
+      $("objet").value = mail.objet;
+      $("corps").value = mail.corps;
+      $("m-mail").textContent = "";
+      show("v-mail");
+    } catch (e) {
+      $("m-form").textContent = e.message;
+      show("v-form");
+    } finally { setBusy(false); }
+  }
+  $("b-gen").onclick = () => {
+    const note = $("note").value.trim();
+    if (note.length < 10) { $("m-form").textContent = "Écris ou dicte une phrase sur la personne et son besoin."; return; }
+    generate(note);
+  };
+
+  // Envoi : ouvre la messagerie du téléphone, déjà remplie. Le mail part de ta propre adresse.
+  const mailto = () =>
+    "mailto:" + encodeURIComponent($("dest").value.trim()).replace(/%40/g, "@") +
+    "?subject=" + encodeURIComponent($("objet").value) +
+    "&body=" + encodeURIComponent($("corps").value.replace(/\r?\n/g, "\r\n"));
+  $("b-send").onclick = (e) => {
+    if (!$("dest").value.includes("@")) { e.preventDefault(); $("m-mail").textContent = "Il manque son adresse mail."; return; }
+    $("b-send").href = mailto();
+    const k = "salon_n_" + today;
+    store.set(k, String(Number(store.get(k) || 0) + 1));
+    refreshCount();
+    $("m-mail").className = "msg ok";
+    $("m-mail").textContent = "Messagerie ouverte : appuie sur Envoyer.";
+  };
+  $("b-copy").onclick = async () => {
+    const text = $("objet").value + "\n\n" + $("corps").value;
+    try { await navigator.clipboard.writeText(text); $("m-mail").className = "msg ok"; $("m-mail").textContent = "Copié."; }
+    catch { $("corps").select(); $("m-mail").textContent = "Sélectionne le texte et copie-le."; }
+  };
+  $("b-redo").onclick = () => { show("v-form"); generate(lastNote || $("note").value.trim()); };
+  $("b-next").onclick = () => { $("email").value = ""; $("note").value = ""; $("m-form").textContent = ""; show("v-form"); };
+
+  // QR contact
+  let from = "v-form";
+  $("b-qr").onclick = () => { from = "v-form"; show("v-qr"); };
+  $("b-back").onclick = () => show(from);
+
+  refreshCount();
+  show(code ? "v-form" : "v-code");
+})();
+</script>
+</body>
+</html>
